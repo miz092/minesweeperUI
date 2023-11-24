@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'MS Sans Serif';
+    src: url('fonts/MS Sans Serif.ttf');
+}
+
+* {
+    font-family: 'MS Sans Serif';
+    color: white;
+
+}
+body{
+    margin: 0;
+    padding: 0%;
+
+}
+
+.app {
+
+    background-color: #008080;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.app .game {
+    transform: scale(2);
+}
+
+.programs {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.program {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.program:hover {
+    cursor: pointer;
+}
+
+.program .program-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 5px;
+}
+
+.program .program-name {
+    margin: 0;
+}
+
+.window {
+    z-index: 1;
+
+    padding: 3px;
+    background-color: #BFBFBF;
+
+    border-width: 3px;
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: white;
+    border-bottom-color: #808080;
+    border-right-color: #808080; 
+
+    box-shadow:
+         -1px -1px 0 1px #BFBFBF, 
+         0px 0px 0 2px black;
+}
+
+.window .title {
+    padding: 4px 3px;
+    background: linear-gradient(to left, #1085D2, #00007B);
+    margin-bottom: 3px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 14px;
+}
+
+.window>*:not(.title) {
+    padding: 3px 8px;
+}
+
+.window>*:not(.title) * {
+    color: black;
+}
+
+.window .close-window-button {
+    width: 18px;
+    height: 16px;
+    background-image: url('./sprites/close_button.png');
+    background-size: contain;
+}
