@@ -66,12 +66,9 @@ function Game({ estate, board, start }) {
     if (timerStarted < 0) {
       setTimerStarted(Date.now());
     }
-
     let gameState = { board: currentBoard, engineState: currentEstate };
-
     try {
       let newState = await updateGameState(gameState, interaction);
-      console.log(newState.msg);
 
       if (newState?.state.engineState) {
         setRemainingMines(newState?.remainingMines);
