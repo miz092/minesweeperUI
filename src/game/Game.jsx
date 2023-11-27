@@ -11,6 +11,9 @@ function Game({ estate, board, start }) {
   const [mouseDownOnTile, setMouseDownOnTile] = useState(false);
   const [timerStarted, setTimerStarted] = useState(-1);
   const [timeToDisplay, setTimeToDisplay] = useState(0);
+  const [currentBoard, setCurrentboard] = useState(board);
+  const [currentEstate, setCurrentEstate] = useState(estate);
+  const [remainingMines, setRemainingMines] = useState(30);
 
   let fieldTypeCounts = {};
   useEffect(() => {
@@ -38,33 +41,43 @@ function Game({ estate, board, start }) {
       }
     };
   };
-
   useEffect(timer, [timerStarted]);
+
   useEffect(() => {
     setTimeToDisplay(0);
     setTimerStarted(-1);
     setRestartGame(false);
-
     start();
+    setCurrentboard(board);
+    setCurrentEstate(estate);
+    setRemainingMines(30);
   }, [restartGame]);
 
-  let mineCount = estate.mineCount;
   let flagCount = null;
 
-  const gameEnded = false;
+  let mineCount = remainingMines;
+
+  const gameEnded = currentEstate?.msg;
+
   const win = false;
 
   ////GAME STATE UPDATE FUNCTION
   const letsUpdateGameState = async (interaction) => {
     if (timerStarted < 0) {
-      console.log("Tile click timer started: ", timerStarted, timerStarted);
       setTimerStarted(Date.now());
     }
-    // console.log("this is interaction: ", interaction);
-    let gameState = { board: board, engineState: null };
+
+    let gameState = { board: currentBoard, engineState: currentEstate };
 
     try {
       let newState = await updateGameState(gameState, interaction);
+      console.log(newState.msg);
+
+      if (newState?.state.engineState) {
+        setRemainingMines(newState?.remainingMines);
+        setCurrentboard(newState.state.board);
+        setCurrentEstate(newState?.state.engineState);
+      }
     } catch (error) {
       console.error("Error updating game state:", error);
     }
@@ -92,7 +105,7 @@ function Game({ estate, board, start }) {
         <DigitsDisplay digits={3} value={timeToDisplay} />
       </div>
       <div className={styles["inner-border"]}>
-        {board.map((v, y) => (
+        {currentBoard.map((v, y) => (
           <div key={`row-${y}`} className={styles["row"]}>
             {v.map((tile, x) => (
               <Tile

@@ -1,8 +1,9 @@
 
 
 export async function startGame() {
+  console.log("startGame called");
   try {
-    const response = await fetch(`http://localhost:8080/play/start`, {
+    const response = await fetch(`https://sweeperapp.onrender.com/play/start`, {
       credentials: 'include', // Don't forget to specify this if you need cookies
     });
 
@@ -10,6 +11,7 @@ export async function startGame() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
+
     return data;
   } catch (error) {
    
@@ -19,10 +21,11 @@ export async function startGame() {
 }
 
 export async function updateGameState(gameState, interaction) {
+  console.log("updateGameState called");
 
   let gameUpdateRequest = {};
   try {
-    const response = await fetch(`http://localhost:8080/play/interact`, {
+    const response = await fetch(`https://sweeperapp.onrender.com/play/interact`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -41,7 +44,7 @@ export async function updateGameState(gameState, interaction) {
     }
 //// itt kapunk egy gamereply objektumot, amit vissza kell adni a játéknak
     const data = await response.json();
-    console.log(data);
+    return data;
 
   } catch (error) {
     console.error('Error during fetch:', error);

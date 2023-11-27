@@ -39,8 +39,8 @@
 }
 
   .tile {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     display: inline-block;
 
     background-image: url('../sprites/tile_normal.png');

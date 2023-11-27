@@ -12,8 +12,8 @@ function Root() {
   async function start() {
     try {
       const response = await startGame();
-      const state = response;
-      setGameState(state);
+
+      setGameState(response);
     } catch (error) {
       console.error("Error fetching game state:", error);
     }
@@ -56,9 +56,9 @@ function Root() {
   ]);
 
   return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    // <React.StrictMode>
+    <RouterProvider router={router} />
+    // </React.StrictMode>
   );
 }
 

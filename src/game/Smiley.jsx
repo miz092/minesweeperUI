@@ -8,9 +8,8 @@ function Smiley(props) {
     SCARED: styles["scared"],
     WIN: styles["win"],
   };
-
+  console.log("clicked", props);
   const className = `${styles["smiley"]} ${stateToClassName[props.state]}`;
-  console.log(className);
 
   return <div className={className} onClick={props.onReset} />;
 }

@@ -72,7 +72,6 @@ const Tile = ({
   const [internalState, setInternalState] = useState("");
 
   useEffect(() => {
-    // Use the useEffect hook to update internalState when fieldType changes
     if (clickableTypes.includes(fieldType)) {
       setInternalState("COVERED");
     } else if (nonClickableTypes.includes(fieldType)) {
@@ -86,19 +85,27 @@ const Tile = ({
     // internalState = getInternalState(fieldType);
     e.preventDefault();
     const isRightClick = e.button === 2;
-    if (internalState === "REVEALED") {
-      return;
-    } else {
-      const interaction = {
-        row: coordinates.y,
-        col: coordinates.x,
-        rightClick: isRightClick,
-      };
 
-      updateState(interaction);
-      console.log("state updated: ", interaction);
-    }
-    console.log("internalState: ", internalState, "fieldType: ", fieldType);
+    const interaction = {
+      row: coordinates.y,
+      col: coordinates.x,
+      rightClick: isRightClick,
+    };
+
+    updateState(interaction);
+  };
+  const handleRightClick = (e) => {
+    // internalState = getInternalState(fieldType);
+    console.log("context menu called");
+    e.preventDefault();
+
+    const interaction = {
+      row: coordinates.y,
+      col: coordinates.x,
+      rightClick: true,
+    };
+    console.log("this is interaction: ", interaction);
+    updateState(interaction);
   };
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
 
@@ -108,7 +115,7 @@ const Tile = ({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e)}
-      onContextMenu={(e) => handleClick(e)}
+      onContextMenuCapture={(e) => handleRightClick(e)}
     />
   );
 };
