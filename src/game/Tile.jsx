@@ -131,7 +131,7 @@ const Tile = ({
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      onClick={() => myclick()}
+      onClick={() => handleTileClick()}
 
       // onTouchStart={handleTouchStart
       // onTouchEnd={handleTouchEnd}
