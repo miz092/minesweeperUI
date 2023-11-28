@@ -30,6 +30,8 @@ const fieldTypeToClassName = {
   NOT_NECESSARILY_MINE: "not_necessarily_mine",
   QUESTION_MARK: "question",
 };
+const clickableTypes = ["COVERED", "FLAGGED", "QUESTION_MARK"];
+const revealedTypes = [];
 
 const nonClickableTypes = [
   "FREE_0",
@@ -92,13 +94,10 @@ const Tile = ({
 
     updateState(interaction);
   };
-  document.addEventListener("touchstart", (e) => {
-    console.log(e);
-  });
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
-
+    e.preventDefault();
     // e.stopPropagation();
 
     const interaction = {
