@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://miz092.github.io/justice-minesweeper/",
+  "homepage": "https://miz092.github.io/minesweeperui/",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
