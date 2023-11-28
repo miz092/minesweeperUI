@@ -66,7 +66,7 @@ function Game({ estate, board, start }) {
       console.error("Error updating game state:", error);
     }
   };
-  document.addEventListener("contextmenu", (e) => {
+  document.addEventListener("touchstart", (e) => {
     e.preventDefault();
   });
 

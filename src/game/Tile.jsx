@@ -83,7 +83,7 @@ const Tile = ({
 
   const handleClick = (e) => {
     // internalState = getInternalState(fieldType);
-    e.preventDefault();
+
     const isRightClick = e.button === 2;
 
     const interaction = {
