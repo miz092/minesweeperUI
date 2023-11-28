@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://miz092.github.io/minesweeperui/",
-  "proxy": "https://justice-sweeper.onrender.com/",
+
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
