@@ -66,9 +66,6 @@ function Game({ estate, board, start }) {
       console.error("Error updating game state:", error);
     }
   };
-  document.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-  });
 
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
