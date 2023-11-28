@@ -5,6 +5,7 @@ export async function startGame() {
   try {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
       credentials: 'include', // Don't forget to specify this if you need cookies
+      mode: 'no-cors',
     });
 
     if (!response.ok) {
@@ -37,6 +38,7 @@ export async function updateGameState(gameState, interaction) {
         interaction: interaction}
       ),
       credentials: 'include',
+      mode: 'no-cors',
     });
 
     if (!response.ok) {
