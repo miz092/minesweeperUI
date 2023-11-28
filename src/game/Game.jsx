@@ -13,18 +13,7 @@ function Game({ estate, board, start }) {
   const [timeToDisplay, setTimeToDisplay] = useState(0);
   const [currentBoard, setCurrentboard] = useState(board);
   const [currentEstate, setCurrentEstate] = useState(estate);
-  const [remainingMines, setRemainingMines] = useState(30);
-
-  let fieldTypeCounts = {};
-  useEffect(() => {
-    fieldTypeCounts = {};
-
-    board.flat().forEach((tile) => {
-      fieldTypeCounts[tile] = (fieldTypeCounts[tile] || 0) + 1;
-    });
-
-    // console.log("FieldType Counts:", fieldTypeCounts);
-  }, [board]);
+  const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
 
   const timer = () => {
     let interval = null;
@@ -50,12 +39,10 @@ function Game({ estate, board, start }) {
     start();
     setCurrentboard(board);
     setCurrentEstate(estate);
-    setRemainingMines(30);
+    setRemainingMines(estate?.mineCount);
   }, [restartGame]);
 
   let flagCount = null;
-
-  let mineCount = remainingMines;
 
   const gameEnded = currentEstate?.msg;
 
