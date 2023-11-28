@@ -95,8 +95,9 @@ const Tile = ({
     updateState(interaction);
     return false;
   };
-  const handleTouchStart = () => {
-    touchStartTimer = setTimeout(() => {
+  const handleTouchStart = (e) => {
+    console.log(e);
+    let touchStartTimer = setTimeout(() => {
       const interaction = {
         row: coordinates.y,
         col: coordinates.x,
