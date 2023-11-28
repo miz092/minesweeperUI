@@ -104,17 +104,18 @@ const Tile = ({
       };
       updateState(interaction);
     }, 500);
+    clearInterval(touchStartTimer);
   };
 
-  const handleTouchEnd = () => {
-    clearTimeout(touchStartTimer);
-    const interaction = {
-      row: coordinates.y,
-      col: coordinates.x,
-      rightClick: false,
-    };
-    updateState(interaction);
-  };
+  // const handleTouchEnd = () => {
+  //   clearTimeout(touchStartTimer);
+  //   const interaction = {
+  //     row: coordinates.y,
+  //     col: coordinates.x,
+  //     rightClick: false,
+  //   };
+  //   updateState(interaction);
+  // };
 
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
