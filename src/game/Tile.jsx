@@ -97,15 +97,9 @@ const Tile = ({
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
-    // e.preventDefault();
+    e.preventDefault();
     // e.stopPropagation();
-    // e.stopImmediatePropagation();
-    document
-      .getElementsByClassName(className)
-      .addEventListener("touchstart", function (event) {
-        event.preventDefault();
-        // Your touch event handling code here
-      });
+    e.stopImmediatePropagation();
 
     const interaction = {
       row: coordinates.y,
@@ -121,6 +115,8 @@ const Tile = ({
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
+      onTouchStart={onMouseDown}
+      onTouchEnd={onMouseUp}
       onClick={(e) => handleClick(e)}
       onContextMenu={(e) => {
         handleRightClick(e);
