@@ -82,10 +82,6 @@ const Tile = ({
   }, [fieldType]);
 
   const handleClick = (isRightClick) => {
-    // internalState = getInternalState(fieldType);
-    e.preventDefault();
-    const isRightClick = e.button === 2;
-
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
@@ -95,20 +91,6 @@ const Tile = ({
     updateState(interaction);
     return false;
   };
-  const handleTouchStart = () => {
-    let touchStartTimer = setTimeout(() => {
-      console.log("long press");
-      handleClick(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(touchStartTimer);
-      handleClick(false);
-      console.log("short press");
-    };
-  };
-
-  const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
     e.preventDefault();
@@ -123,6 +105,8 @@ const Tile = ({
     return false;
   };
 
+  const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
+
   return (
     <div
       className={className}
@@ -132,7 +116,7 @@ const Tile = ({
       onContextMenu={(e) => {
         handleRightClick(e);
       }}
-      onTouchStart={handleTouchStart}
+
       // onTouchEnd={handleTouchEnd}
     />
   );
