@@ -3,7 +3,7 @@
 export async function startGame() {
   console.log("startGame called");
   try {
-    const response = await fetch(`https://sweeperapp.onrender.com/play/start`, {
+    const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
       credentials: 'include', // Don't forget to specify this if you need cookies
     });
 
@@ -25,7 +25,7 @@ export async function updateGameState(gameState, interaction) {
 
   let gameUpdateRequest = {};
   try {
-    const response = await fetch(`https://sweeperapp.onrender.com/play/interact`, {
+    const response = await fetch(`https://justice-sweeper.onrender.com/play/interact`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json; charset=UTF-8"
