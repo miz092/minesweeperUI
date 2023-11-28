@@ -99,6 +99,7 @@ function Game({ estate, board, start }) {
                 onMouseDown={(e) => e.button === 0 && setMouseDownOnTile(true)}
                 onMouseUp={(e) => e.button === 0 && setMouseDownOnTile(false)}
                 key={`${y}-${x}`}
+                onContextMenu={(e) => e.preventDefault()}
                 updateState={letsUpdateGameState}
               />
             ))}
