@@ -114,9 +114,9 @@ const Tile = ({
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      onTouchStart={onMouseDown}
+      onTouchStart={(e) => e.stopPropagation()}
       onTouchEnd={onMouseUp}
-      onClick={(e) => handleClick(e)}
+      onClick={(e) => e.stopPropagation()}
       onContextMenu={(e) => {
         handleRightClick(e);
       }}
