@@ -91,37 +91,38 @@ const Tile = ({
     updateState(interaction);
     return false;
   };
-  const handleRightClick = (e) => {
-    // internalState = getInternalState(fieldType);
-    e.preventDefault();
-    // e.stopPropagation();
+  // const handleRightClick = (e) => {
+  //   // internalState = getInternalState(fieldType);
+  //   e.preventDefault();
+  //   // e.stopPropagation();
 
-    const interaction = {
-      row: coordinates.y,
-      col: coordinates.x,
-      rightClick: true,
-    };
-    updateState(interaction);
-    return false;
-  };
+  //   const interaction = {
+  //     row: coordinates.y,
+  //     col: coordinates.x,
+  //     rightClick: true,
+  //   };
+  //   updateState(interaction);
+  //   return false;
+  // };
 
-  let pendingClick;
-  let clicked = 0;
-  let time_dbclick = 500; // 500ms
+  const handleTileClick = () => {
+    clickCount++;
 
-  function myclick() {
-    clicked++;
-    clearTimeout(pendingClick);
-    if (clicked >= 2) {
+    if (clickCount === 1) {
+      clickTimeout = setTimeout(() => {
+        if (clickCount === 1) {
+          // Single click
+          handleClick(false);
+        }
+        clickCount = 0;
+      }, 300); // Adjust the time to distinguish between single and double clicks
+    } else if (clickCount === 2) {
+      // Double click
+      clearTimeout(clickTimeout);
       handleClick(true);
-      clicked = 0;
-    } else {
-      pendingClick = setTimeout(() => {
-        handleClick(false);
-        clicked = 0;
-      }, time_dbclick);
+      clickCount = 0;
     }
-  }
+  };
 
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
 
@@ -131,9 +132,7 @@ const Tile = ({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={() => myclick()}
-      onContextMenu={(e) => {
-        handleRightClick(e);
-      }}
+
       // onTouchStart={handleTouchStart
       // onTouchEnd={handleTouchEnd}
     />
