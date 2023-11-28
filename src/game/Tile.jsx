@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Game.module.css";
+import useLongPress from "../app/UseLongPress";
 
 const fieldTypeToClassName = {
   FREE_0: "revealed_empty",
@@ -30,8 +31,6 @@ const fieldTypeToClassName = {
   NOT_NECESSARILY_MINE: "not_necessarily_mine",
   QUESTION_MARK: "question",
 };
-const clickableTypes = ["COVERED", "FLAGGED", "QUESTION_MARK"];
-const revealedTypes = [];
 
 const nonClickableTypes = [
   "FREE_0",
@@ -67,11 +66,11 @@ const Tile = ({
   onMouseUp,
   updateState,
 }) => {
+  const { action, handlers } = useLongPress();
+  const { action: otherAction, handlers: otherHandlers } = useLongPress();
+
   const field = fieldTypeToClassName[fieldType];
 
-  window.oncontextmenu = function () {
-    return false;
-  };
   const [internalState, setInternalState] = useState("");
 
   useEffect(() => {
@@ -97,10 +96,13 @@ const Tile = ({
 
     updateState(interaction);
   };
+  document.addEventListener("touchstart", (e) => {
+    console.log(e);
+  });
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
-    e.preventDefault();
+
     // e.stopPropagation();
 
     const interaction = {
