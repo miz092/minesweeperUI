@@ -15,6 +15,7 @@ export async function startGame() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
+    console.log(JSON.stringify(data));
 
     return data;
   } catch (error) {
