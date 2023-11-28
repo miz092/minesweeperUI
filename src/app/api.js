@@ -5,7 +5,10 @@ export async function startGame() {
   console.log("request made with no cors")
   try {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
+      method: 'GET',
       credentials: 'include', // Don't forget to specify this if you need cookies
+      headers: {    'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods':'GET,POST' }
 
     });
 
@@ -31,7 +34,9 @@ export async function updateGameState(gameState, interaction) {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/interact`, {
       method: 'POST',
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
+        "Content-type": "application/json; charset=UTF-8",
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods':'GET,POST'
       },
       body: 
       JSON.stringify(
@@ -40,7 +45,7 @@ export async function updateGameState(gameState, interaction) {
         interaction: interaction}
       ),
       credentials: 'include',
-      mode: 'no-cors',
+  
     });
 
     if (!response.ok) {
