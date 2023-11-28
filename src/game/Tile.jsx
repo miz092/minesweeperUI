@@ -81,7 +81,7 @@ const Tile = ({
     }
   }, [fieldType]);
 
-  const handleClick = (isRightClick) => {
+  const click = (isRightClick) => {
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
@@ -104,24 +104,22 @@ const Tile = ({
   //   updateState(interaction);
   //   return false;
   // };
-  let clickCount = 0;
-  let clickTimeout;
-  const handleTileClick = () => {
-    clickCount++;
-
-    if (clickCount === 1) {
-      clickTimeout = setTimeout(() => {
-        if (clickCount === 1) {
-          // Single click
-          handleClick(false);
-        }
-        clickCount = 0;
-      }, 300); // Adjust the time to distinguish between single and double clicks
-    } else if (clickCount === 2) {
-      // Double click
-      clearTimeout(clickTimeout);
-      handleClick(true);
-      clickCount = 0;
+  const handleClick = (event) => {
+    console.log(event.detail);
+    switch (event.detail) {
+      case 1: {
+        console.log("single click");
+        click(false);
+        break;
+      }
+      case 2: {
+        click(true);
+        console.log("double click");
+        break;
+      }
+      default: {
+        break;
+      }
     }
   };
 
@@ -132,7 +130,7 @@ const Tile = ({
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      onClick={() => handleTileClick()}
+      onClick={() => handleClick()}
 
       // onTouchStart={handleTouchStart
       // onTouchEnd={handleTouchEnd}
