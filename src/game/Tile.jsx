@@ -65,9 +65,6 @@ const Tile = ({
   onMouseUp,
   updateState,
 }) => {
-  const { action, handlers } = useLongPress();
-  const { action: otherAction, handlers: otherHandlers } = useLongPress();
-
   const field = fieldTypeToClassName[fieldType];
 
   const [internalState, setInternalState] = useState("");
