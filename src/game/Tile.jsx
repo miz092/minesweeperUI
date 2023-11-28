@@ -96,7 +96,6 @@ const Tile = ({
   };
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
-    console.log("context menu called");
     e.preventDefault();
 
     const interaction = {
@@ -104,7 +103,6 @@ const Tile = ({
       col: coordinates.x,
       rightClick: true,
     };
-    console.log("this is interaction: ", interaction);
     updateState(interaction);
   };
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
