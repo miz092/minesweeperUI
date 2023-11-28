@@ -104,6 +104,7 @@ const Tile = ({
       rightClick: true,
     };
     updateState(interaction);
+    return false;
   };
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
 
