@@ -142,7 +142,7 @@ const Tile = ({
         handleRightClick(e);
       }}
       onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      // onTouchEnd={handleTouchEnd}
     />
   );
 };
