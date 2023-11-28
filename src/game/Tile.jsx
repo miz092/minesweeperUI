@@ -83,7 +83,7 @@ const Tile = ({
 
   const handleClick = (e) => {
     // internalState = getInternalState(fieldType);
-
+    e.preventDefault();
     const isRightClick = e.button === 2;
 
     const interaction = {
@@ -93,7 +93,29 @@ const Tile = ({
     };
 
     updateState(interaction);
+    return false;
   };
+  const handleTouchStart = () => {
+    touchStartTimer = setTimeout(() => {
+      const interaction = {
+        row: coordinates.y,
+        col: coordinates.x,
+        rightClick: true,
+      };
+      updateState(interaction);
+    }, 500);
+  };
+
+  const handleTouchEnd = () => {
+    clearTimeout(touchStartTimer);
+    const interaction = {
+      row: coordinates.y,
+      col: coordinates.x,
+      rightClick: false,
+    };
+    updateState(interaction);
+  };
+
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
@@ -118,9 +140,8 @@ const Tile = ({
       onContextMenu={(e) => {
         handleRightClick(e);
       }}
-      onTouchStart={(e) => {
-        e.preventDefault();
-      }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     />
   );
 };
