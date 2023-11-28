@@ -113,6 +113,7 @@ const Tile = ({
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e)}
       onDoubleClick={(e) => handleRightClick(e)}
+      onContextMenu={(e) => handleRightClick(e)}
       // onTouchStart={handleTouchStart
       // onTouchEnd={handleTouchEnd}
     />
