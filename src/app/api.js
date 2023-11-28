@@ -2,10 +2,11 @@
 
 export async function startGame() {
   console.log("startGame called");
+  console.log("request made with no cors")
   try {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
       credentials: 'include', // Don't forget to specify this if you need cookies
-      mode: 'no-cors',
+
     });
 
     if (!response.ok) {
@@ -19,6 +20,7 @@ export async function startGame() {
     console.error('Error during fetch:', error);
     throw error; 
   }
+
 }
 
 export async function updateGameState(gameState, interaction) {
