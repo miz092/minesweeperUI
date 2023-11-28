@@ -105,6 +105,24 @@ const Tile = ({
     return false;
   };
 
+  let pendingClick;
+  let clicked = 0;
+  let time_dbclick = 500; // 500ms
+
+  function myclick() {
+    clicked++;
+    clearTimeout(pendingClick);
+    if (clicked >= 2) {
+      handleClick(true);
+      clicked = 0;
+    } else {
+      pendingClick = setTimeout(() => {
+        handleClick(false);
+        clicked = 0;
+      }, time_dbclick);
+    }
+  }
+
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
 
   return (
@@ -112,8 +130,7 @@ const Tile = ({
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      onClick={() => handleClick(false)}
-      onDoubleClick={() => handleClick(true)}
+      onClick={() => myclick()}
       onContextMenu={(e) => {
         handleRightClick(e);
       }}
