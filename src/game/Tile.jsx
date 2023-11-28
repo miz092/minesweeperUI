@@ -97,6 +97,8 @@ const Tile = ({
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
     e.preventDefault();
+    e.stopPropagation();
+    // e.stopImmediatePropagation();
 
     const interaction = {
       row: coordinates.y,
