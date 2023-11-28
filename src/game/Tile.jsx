@@ -107,13 +107,13 @@ const Tile = ({
   const handleClick = (event) => {
     console.log(event.detail);
     switch (event.detail) {
-      case 1: {
+      case 2: {
         console.log("single click");
-        click(false);
+        click(true);
         break;
       }
-      case 2: {
-        click(true);
+      case 1: {
+        click(false);
         console.log("double click");
         break;
       }
