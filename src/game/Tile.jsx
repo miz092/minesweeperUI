@@ -104,7 +104,8 @@ const Tile = ({
   //   updateState(interaction);
   //   return false;
   // };
-
+  let clickCount = 0;
+  let clickTimeout;
   const handleTileClick = () => {
     clickCount++;
 
