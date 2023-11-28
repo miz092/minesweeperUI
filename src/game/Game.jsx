@@ -14,17 +14,7 @@ function Game({ estate, board, start }) {
   const [currentBoard, setCurrentboard] = useState(board);
   const [currentEstate, setCurrentEstate] = useState(estate);
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
-
-  let fieldTypeCounts = {};
-  useEffect(() => {
-    fieldTypeCounts = {};
-
-    board.flat().forEach((tile) => {
-      fieldTypeCounts[tile] = (fieldTypeCounts[tile] || 0) + 1;
-    });
-
-    // console.log("FieldType Counts:", fieldTypeCounts);
-  }, [board]);
+  const [markedCount, setMarkedCount] = useState(estate?.markedCount);
 
   const timer = () => {
     let interval = null;
@@ -53,10 +43,6 @@ function Game({ estate, board, start }) {
     setRemainingMines(estate.mineCount);
   }, [restartGame]);
 
-  let flagCount = null;
-
-  let mineCount = remainingMines;
-
   const gameEnded = currentEstate?.msg;
 
   const win = false;
@@ -83,7 +69,7 @@ function Game({ estate, board, start }) {
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
-        <DigitsDisplay digits={3} value={mineCount - flagCount} />
+        <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
           state={
             gameEnded
