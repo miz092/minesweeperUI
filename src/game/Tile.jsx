@@ -106,16 +106,6 @@ const Tile = ({
     };
   };
 
-  // const handleTouchEnd = () => {
-  //   clearTimeout(touchStartTimer);
-  //   const interaction = {
-  //     row: coordinates.y,
-  //     col: coordinates.x,
-  //     rightClick: false,
-  //   };
-  //   updateState(interaction);
-  // };
-
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
   const handleRightClick = (e) => {
     // internalState = getInternalState(fieldType);
