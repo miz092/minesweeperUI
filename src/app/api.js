@@ -5,7 +5,13 @@ export async function startGame() {
   console.log("startGame called");
   console.log("request made with no cors")
   try {
-    const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
+    // const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
+    //   method: 'GET',
+    //   headers: {    'Access-Control-Allow-Origin':'*',
+    //   'Access-Control-Allow-Methods':'GET,POST' }
+
+    // });
+    const response = await fetch(`http://localhost:8080/play/start`, {
       method: 'GET',
       headers: {    'Access-Control-Allow-Origin':'*',
       'Access-Control-Allow-Methods':'GET,POST' }
@@ -31,20 +37,32 @@ export async function updateGameState(gameState, interaction) {
 
   let gameUpdateRequest = {};
   try {
-    const response = await fetch(`https://justice-sweeper.onrender.com/play/interact`, {
-      method: 'POST',
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods':'GET,POST'
-      },
-      body: 
-      JSON.stringify(
-        gameUpdateRequest = {
-        gameState: gameState,
-        interaction: interaction}
-      ),
-    
+    // const response = await fetch(`https://justice-sweeper.onrender.com/play/interact`, {
+    //   method: 'POST',
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //     'Access-Control-Allow-Origin':'*',
+    //     'Access-Control-Allow-Methods':'GET,POST'
+    //   },
+    //   body: 
+    //   JSON.stringify(
+    //     gameUpdateRequest = {
+    //     gameState: gameState,
+    //     interaction: interaction}
+    //   ),
+      const response = await fetch(`http://localhost:8080/play/interact`, {
+        method: 'POST',
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          'Access-Control-Allow-Origin':'*',
+          'Access-Control-Allow-Methods':'GET,POST'
+        },
+        body: 
+        JSON.stringify(
+          gameUpdateRequest = {
+          gameState: gameState,
+          interaction: interaction}
+        ),
   
     });
 

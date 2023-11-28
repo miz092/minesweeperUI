@@ -13,7 +13,7 @@ function Game({ estate, board, start }) {
   const [timeToDisplay, setTimeToDisplay] = useState(0);
   const [currentBoard, setCurrentboard] = useState(board);
   const [currentEstate, setCurrentEstate] = useState(estate);
-  const [remainingMines, setRemainingMines] = useState(30);
+  const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
 
   let fieldTypeCounts = {};
   useEffect(() => {
@@ -50,7 +50,7 @@ function Game({ estate, board, start }) {
     start();
     setCurrentboard(board);
     setCurrentEstate(estate);
-    setRemainingMines(30);
+    setRemainingMines(estate.mineCount);
   }, [restartGame]);
 
   let flagCount = null;
