@@ -69,6 +69,9 @@ const Tile = ({
 }) => {
   const field = fieldTypeToClassName[fieldType];
 
+  window.oncontextmenu = function () {
+    return false;
+  };
   const [internalState, setInternalState] = useState("");
 
   useEffect(() => {
@@ -114,9 +117,7 @@ const Tile = ({
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      onTouchStart={(e) => e.stopPropagation()}
-      onTouchEnd={onMouseUp}
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => handleClick(e)}
       onContextMenu={(e) => {
         handleRightClick(e);
       }}
