@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Game.module.css";
-import useLongPress from "../app/UseLongPress";
 
 const fieldTypeToClassName = {
   FREE_0: "revealed_empty",
