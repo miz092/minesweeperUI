@@ -113,7 +113,9 @@ const Tile = ({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e)}
-      onContextMenuCapture={(e) => handleRightClick(e)}
+      onContextMenu={(e) => {
+        e.preventDefault(), handleRightClick(e);
+      }}
     />
   );
 };
