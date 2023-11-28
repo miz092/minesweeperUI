@@ -97,12 +97,14 @@ const Tile = ({
   };
   const handleTouchStart = () => {
     let touchStartTimer = setTimeout(() => {
+      console.log("long press");
       handleClick(true);
     }, 500);
 
     return () => {
       clearTimeout(touchStartTimer);
       handleClick(false);
+      console.log("short press");
     };
   };
 
