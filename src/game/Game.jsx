@@ -41,11 +41,13 @@ function Game({ estate, board, start }) {
     setCurrentboard(board);
     setCurrentEstate(estate);
     setRemainingMines(estate.mineCount);
+    setMarkedCount(estate.markedCount);
   }, [restartGame]);
 
-  const gameEnded = currentEstate?.msg;
+  const gameEnded = estate.msg;
 
   const win = false;
+  console.log(gameEnded);
 
   ////GAME STATE UPDATE FUNCTION
   const letsUpdateGameState = async (interaction) => {
@@ -60,6 +62,7 @@ function Game({ estate, board, start }) {
         setRemainingMines(newState?.remainingMines);
         setCurrentboard(newState.state.board);
         setCurrentEstate(newState?.state.engineState);
+        console.log(newState?.msg);
       }
     } catch (error) {
       console.error("Error updating game state:", error);
