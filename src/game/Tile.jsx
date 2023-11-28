@@ -81,46 +81,27 @@ const Tile = ({
     }
   }, [fieldType]);
 
-  const click = (isRightClick) => {
+  const handleClick = (e) => {
+    e.preventDefault();
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
-      rightClick: isRightClick,
+      rightClick: false,
     };
 
     updateState(interaction);
     return false;
   };
-  // const handleRightClick = (e) => {
-  //   // internalState = getInternalState(fieldType);
-  //   e.preventDefault();
-  //   // e.stopPropagation();
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    const interaction = {
+      row: coordinates.y,
+      col: coordinates.x,
+      rightClick: true,
+    };
 
-  //   const interaction = {
-  //     row: coordinates.y,
-  //     col: coordinates.x,
-  //     rightClick: true,
-  //   };
-  //   updateState(interaction);
-  //   return false;
-  // };
-  const handleClick = (event) => {
-    console.log(event.detail);
-    switch (event.detail) {
-      case 2: {
-        console.log("single click");
-        click(true);
-        break;
-      }
-      case 1: {
-        click(false);
-        console.log("double click");
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+    updateState(interaction);
+    return false;
   };
 
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
@@ -131,7 +112,7 @@ const Tile = ({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e)}
-
+      onDoubleClick={(e) => handleRightClick(e)}
       // onTouchStart={handleTouchStart
       // onTouchEnd={handleTouchEnd}
     />
