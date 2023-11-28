@@ -2,8 +2,7 @@
 
 
 export async function startGame() {
-  console.log("startGame called");
-  console.log("request made with no cors")
+
   try {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
       method: 'GET',
