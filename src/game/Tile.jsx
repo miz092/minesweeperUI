@@ -118,6 +118,9 @@ const Tile = ({
       onContextMenu={(e) => {
         handleRightClick(e);
       }}
+      onTouchStart={(e) => {
+        e.preventDefault();
+      }}
     />
   );
 };
