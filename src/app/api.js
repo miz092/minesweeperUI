@@ -1,5 +1,6 @@
 
 
+
 export async function startGame() {
   console.log("startGame called");
   console.log("request made with no cors")
