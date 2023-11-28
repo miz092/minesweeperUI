@@ -14,6 +14,7 @@ function Game({ estate, board, start }) {
   const [currentBoard, setCurrentboard] = useState(board);
   const [currentEstate, setCurrentEstate] = useState(estate);
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
+  const [markedCount, setMarkedCount] = useState(estate?.markedCount);
 
   const timer = () => {
     let interval = null;
@@ -40,9 +41,8 @@ function Game({ estate, board, start }) {
     setCurrentboard(board);
     setCurrentEstate(estate);
     setRemainingMines(estate?.mineCount);
+    setMarkedCount(estate?.markedCount);
   }, [restartGame]);
-
-  let flagCount = null;
 
   const gameEnded = currentEstate?.msg;
 
@@ -70,7 +70,7 @@ function Game({ estate, board, start }) {
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
-        <DigitsDisplay digits={3} value={mineCount - flagCount} />
+        <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
           state={
             gameEnded
