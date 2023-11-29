@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styles from "./Game.module.css";
 
 const fieldTypeToClassName = {
@@ -66,35 +66,64 @@ const Tile = ({
   onMouseUp,
   updateState,
 }) => {
-  const field = fieldTypeToClassName[fieldType];
-
-  const [internalState, setInternalState] = useState("");
+  const tileRef = useRef(null);
+  const [isLongPress, setIsLongPress] = useState(false);
+  let touchTimer = null;
 
   useEffect(() => {
-    if (clickableTypes.includes(fieldType)) {
-      setInternalState("COVERED");
-    } else if (nonClickableTypes.includes(fieldType)) {
-      setInternalState("REVEALED");
-    } else {
-      setInternalState("COVERED");
-    }
-  }, [fieldType]);
+    const tileElement = tileRef.current;
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    const isRightClick = e.button === 2;
-
-    const interaction = {
-      row: coordinates.y,
-      col: coordinates.x,
-      rightClick: isRightClick,
+    const handleTouchStart = (e) => {
+      e.preventDefault();
+      setIsLongPress(false);
+      touchTimer = setTimeout(() => {
+        setIsLongPress(true);
+        const interaction = {
+          row: coordinates.y,
+          col: coordinates.x,
+          rightClick: true,
+        };
+        updateState(interaction);
+      }, 450);
     };
 
-    updateState(interaction);
+    const handleTouchEnd = (e) => {
+      if (!isLongPress) {
+        handleClick(e);
+      }
+      setIsLongPress(false);
+      if (touchTimer) {
+        clearTimeout(touchTimer);
+      }
+    };
+
+    tileElement.addEventListener("touchstart", handleTouchStart, {
+      passive: false,
+    });
+    tileElement.addEventListener("touchend", handleTouchEnd, {
+      passive: false,
+    });
+
+    return () => {
+      tileElement.removeEventListener("touchstart", handleTouchStart);
+      tileElement.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [updateState, coordinates]);
+
+  const handleClick = (e) => {
+    if (!isLongPress) {
+      e.preventDefault();
+      const interaction = {
+        row: coordinates.y,
+        col: coordinates.x,
+        rightClick: e.button === 2,
+      };
+      updateState(interaction);
+    }
   };
+
   const handleRightClick = (e) => {
     e.preventDefault();
-
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
@@ -102,15 +131,18 @@ const Tile = ({
     };
     updateState(interaction);
   };
+
+  const field = fieldTypeToClassName[fieldType];
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
 
   return (
     <div
+      ref={tileRef}
       className={className}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      onClick={(e) => handleClick(e)}
-      onContextMenu={(e) => handleRightClick(e)}
+      onClick={handleClick}
+      onContextMenu={handleRightClick}
     />
   );
 };

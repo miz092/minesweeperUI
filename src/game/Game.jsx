@@ -104,6 +104,8 @@ function Game({ estate, board, start, onGameEnd }) {
                 gameEnded={gameEnded}
                 onMouseDown={(e) => e.button === 0 && setMouseDownOnTile(true)}
                 onMouseUp={(e) => e.button === 0 && setMouseDownOnTile(false)}
+                onTouchStart={() => console.log("touchstart")}
+                onTouchEnd={() => console.log("touchend")}
                 key={`${y}-${x}`}
                 updateState={letsUpdateGameState}
               />
