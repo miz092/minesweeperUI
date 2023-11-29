@@ -31,7 +31,6 @@ const fieldTypeToClassName = {
   QUESTION_MARK: "question",
 };
 const clickableTypes = ["COVERED", "FLAGGED", "QUESTION_MARK"];
-const revealedTypes = [];
 
 const nonClickableTypes = [
   "FREE_0",
@@ -83,25 +82,25 @@ const Tile = ({
 
   const handleClick = (e) => {
     e.preventDefault();
+    const isRightClick = e.button === 2;
+
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
-      rightClick: false,
+      rightClick: isRightClick,
     };
 
     updateState(interaction);
-    return false;
   };
   const handleRightClick = (e) => {
     e.preventDefault();
+
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
       rightClick: true,
     };
-
     updateState(interaction);
-    return false;
   };
 
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
@@ -112,10 +111,7 @@ const Tile = ({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e)}
-      onDoubleClick={(e) => handleRightClick(e)}
       onContextMenu={(e) => handleRightClick(e)}
-      // onTouchStart={handleTouchStart
-      // onTouchEnd={handleTouchEnd}
     />
   );
 };

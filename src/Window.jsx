@@ -4,15 +4,17 @@ import React from "react";
 
 function Window(props) {
   return (
-    <div className={`${styles["window"]}`}>
-      <div className={styles["title"]}>
-        {props.title}
-        <Link to="/">
-          <div className={styles["close-window-button"]} />
-        </Link>
+    <>
+      <div className={`${styles["window"]}`}>
+        <div className={styles["title"]}>
+          {props.title}
+          <Link to="/">
+            <div className={styles["close-window-button"]} />
+          </Link>
+        </div>
+        {props.children}
       </div>
-      {props.children}
-    </div>
+    </>
   );
 }
 

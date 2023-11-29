@@ -62,6 +62,64 @@ body{
     margin: 0;
 }
 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.modal {
+    z-index: 101;
+
+    padding: 3px;
+    background-color: #BFBFBF;
+
+    border-width: 3px;
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: white;
+    border-bottom-color: #808080;
+    border-right-color: #808080; 
+    width: auto;
+    box-shadow:
+         -1px -1px 0 1px #BFBFBF, 
+         0px 0px 0 2px black;
+}
+
+.modal .title {
+    padding: 4px 3px;
+    background: linear-gradient(to left, #1085D2, #00007B);
+    margin-bottom: 3px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 14px;
+}
+
+.modal>*:not(.title) {
+    padding: 3px 20px;
+}
+
+.modal>*:not(.title) * {
+    color: black;
+}
+
+.modal .close-modal-button {
+    cursor: pointer;
+    width: 18px;
+    height: 16px;
+    background-image: url('./sprites/close_button.png');
+    background-size: contain;
+}
+
 .window {
     z-index: 1;
 
@@ -106,3 +164,20 @@ body{
     background-image: url('./sprites/close_button.png');
     background-size: contain;
 }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .modal-window {
+    position: fixed;
+    z-index: 101;
+  }

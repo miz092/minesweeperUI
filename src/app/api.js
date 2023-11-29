@@ -15,7 +15,7 @@ export async function startGame() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(JSON.stringify(data));
+
 
     return data;
   } catch (error) {
@@ -27,7 +27,7 @@ export async function startGame() {
 }
 
 export async function updateGameState(gameState, interaction) {
-  console.log("updateGameState called");
+
 
   let gameUpdateRequest = {};
   try {
@@ -47,22 +47,7 @@ export async function updateGameState(gameState, interaction) {
     
   
     });
-    // const response = await fetch(`http://localhost:8080/play/interact`, {
-    //   method: 'POST',
-    //   headers: {
-    //     "Content-type": "application/json; charset=UTF-8",
-    //     'Access-Control-Allow-Origin':'*',
-    //     'Access-Control-Allow-Methods':'GET,POST'
-    //   },
-    //   body: 
-    //   JSON.stringify(
-    //     gameUpdateRequest = {
-    //     gameState: gameState,
-    //     interaction: interaction}
-    //   ),
-    
-  
-    // });
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
