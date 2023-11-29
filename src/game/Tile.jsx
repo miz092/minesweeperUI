@@ -31,7 +31,6 @@ const fieldTypeToClassName = {
   QUESTION_MARK: "question",
 };
 const clickableTypes = ["COVERED", "FLAGGED", "QUESTION_MARK"];
-const revealedTypes = [];
 
 const nonClickableTypes = [
   "FREE_0",
@@ -82,7 +81,6 @@ const Tile = ({
   }, [fieldType]);
 
   const handleClick = (e) => {
-    // internalState = getInternalState(fieldType);
     e.preventDefault();
     const isRightClick = e.button === 2;
 
@@ -95,7 +93,6 @@ const Tile = ({
     updateState(interaction);
   };
   const handleRightClick = (e) => {
-    // internalState = getInternalState(fieldType);
     e.preventDefault();
 
     const interaction = {

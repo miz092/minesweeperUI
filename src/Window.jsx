@@ -3,16 +3,26 @@ import styles from "./app.module.css";
 import React from "react";
 
 function Window(props) {
+  const isModal = props.isModal || false;
+  const onClose = props.onClose;
+
   return (
-    <div className={`${styles["window"]}`}>
-      <div className={styles["title"]}>
-        {props.title}
-        <Link to="/">
-          <div className={styles["close-window-button"]} />
-        </Link>
+    <>
+      {isModal && <div className={styles["modal-overlay"]} />}
+      <div className={`${styles["window"]}`}>
+        <div className={styles["title"]}>
+          {props.title}
+          {isModal ? (
+            <div className={styles["close-window-button"]} onClick={onClose} />
+          ) : (
+            <Link to="/">
+              <div className={styles["close-window-button"]} />
+            </Link>
+          )}
+        </div>
+        {props.children}
       </div>
-      {props.children}
-    </div>
+    </>
   );
 }
 

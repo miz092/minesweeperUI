@@ -3,10 +3,10 @@ import styles from "./Game.module.css";
 
 function Smiley(props) {
   const stateToClassName = {
-    NORMAL: "",
-    LOSE: styles["lose"],
-    SCARED: styles["scared"],
-    WIN: styles["win"],
+    normal: "",
+    lose: styles["lose"],
+    scared: styles["scared"],
+    win: styles["win"],
   };
   const className = `${styles["smiley"]} ${stateToClassName[props.state]}`;
 

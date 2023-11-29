@@ -15,7 +15,6 @@ export async function startGame() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(JSON.stringify(data));
 
     return data;
   } catch (error) {
@@ -27,7 +26,6 @@ export async function startGame() {
 }
 
 export async function updateGameState(gameState, interaction) {
-  console.log("updateGameState called");
 
   let gameUpdateRequest = {};
   try {
