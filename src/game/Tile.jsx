@@ -124,6 +124,7 @@ const Tile = ({
 
   const handleRightClick = (e) => {
     e.preventDefault();
+
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,

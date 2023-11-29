@@ -17,6 +17,7 @@ export async function startGame() {
     }
     const data = await response.json();
 
+
     return data;
   } catch (error) {
    
@@ -52,7 +53,7 @@ export async function updateGameState(gameState, interaction) {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
+//// itt kapunk egy gamereply objektumot, amit vissza kell adni a játéknak
     const data = await response.json();
     return data;
 
