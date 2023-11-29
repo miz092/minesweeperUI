@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import App from "./App.jsx";
 import Window from "./Window.jsx";
 import Modal from "./Modal.jsx";
-import Result from "./game/Result.jsx";
 import Game from "./game/Game.jsx";
 import AboutPage from "./game/About.jsx";
 import Result from "./game/Result.jsx";
