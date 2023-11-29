@@ -7,6 +7,7 @@ import Modal from "./Modal.jsx";
 import Result from "./game/Result.jsx";
 import Game from "./game/Game.jsx";
 import AboutPage from "./game/About.jsx";
+import Result from "./game/Result.jsx";
 import { startGame } from "./app/api.js";
 
 function Root() {
@@ -62,6 +63,14 @@ function Root() {
             element={
               <Window title="About">
                 <AboutPage></AboutPage>
+              </Window>
+            }
+          />
+          <Route
+            path="result"
+            element={
+              <Window title="Result">
+                <Result></Result>
               </Window>
             }
           />
