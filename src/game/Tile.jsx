@@ -28,7 +28,6 @@ const fieldTypeToClassName = {
   PHANTOM_MINE: "phantom_mine",
   WRONGLY_MARKED_MINE: "wrongly_marked_mine",
   NOT_NECESSARILY_MINE: "not_necessarily_mine",
-  QUESTION_MARK: "question",
 };
 const tileToVibrate = ["covered", "flagged"];
 
@@ -49,7 +48,9 @@ const Tile = ({
 
     const handleTouchStart = (e) => {
       setIsLongPress(false);
-      e.preventDefault();
+      if (e.cancelable) {
+        e.preventDefault();
+      }
       touchTimerRef.current = setTimeout(() => {
         setIsLongPress(true);
         const interaction = {
@@ -62,17 +63,19 @@ const Tile = ({
           navigator.vibrate(50);
         }
         updateState(interaction);
-      }, 350);
+      }, 300);
     };
 
     const handleTouchEnd = (e) => {
-      if (!isLongPress) {
-        handleClick(e);
-      }
-      setIsLongPress(false);
       if (touchTimerRef.current) {
         clearTimeout(touchTimerRef.current);
       }
+
+      if (!isLongPress) {
+        handleClick(e);
+      }
+
+      setIsLongPress(false);
     };
 
     tileElement.addEventListener("touchstart", handleTouchStart, {
