@@ -39,7 +39,8 @@ const Tile = ({
   updateState,
 }) => {
   const tileRef = useRef(null);
-  const touchTimerRef = useRef(null);
+  const updateTimerRef = useRef(null);
+  const vibrationTimerRef = useRef(null);
   const [isLongPress, setIsLongPress] = useState(false);
   const field = fieldTypeToClassName[fieldType];
 
@@ -51,24 +52,31 @@ const Tile = ({
       if (e.cancelable) {
         e.preventDefault();
       }
-      touchTimerRef.current = setTimeout(() => {
+
+      updateTimerRef.current = setTimeout(() => {
         setIsLongPress(true);
         const interaction = {
           row: coordinates.y,
           col: coordinates.x,
           rightClick: true,
         };
+        updateState(interaction);
+      }, 300);
+
+      vibrationTimerRef.current = setTimeout(() => {
         let shouldVibrate = tileToVibrate.includes(field);
         if ("vibrate" in navigator && shouldVibrate) {
           navigator.vibrate(50);
         }
-        updateState(interaction);
-      }, 300);
+      }, 450);
     };
 
     const handleTouchEnd = (e) => {
-      if (touchTimerRef.current) {
-        clearTimeout(touchTimerRef.current);
+      if (updateTimerRef.current) {
+        clearTimeout(updateTimerRef.current);
+      }
+      if (vibrationTimerRef.current) {
+        clearTimeout(vibrationTimerRef.current);
       }
 
       if (!isLongPress) {
@@ -89,7 +97,7 @@ const Tile = ({
       tileElement.removeEventListener("touchstart", handleTouchStart);
       tileElement.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [updateState, coordinates]);
+  }, [updateState, coordinates, field]);
 
   const handleClick = (e) => {
     if (!isLongPress) {
@@ -104,7 +112,6 @@ const Tile = ({
 
   const handleRightClick = (e) => {
     e.preventDefault();
-
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
