@@ -30,34 +30,6 @@ const fieldTypeToClassName = {
   NOT_NECESSARILY_MINE: "not_necessarily_mine",
   QUESTION_MARK: "question",
 };
-const clickableTypes = ["COVERED", "FLAGGED", "QUESTION_MARK"];
-
-const nonClickableTypes = [
-  "FREE_0",
-  "FREE_1",
-  "FREE_2",
-  "FREE_3",
-  "FREE_4",
-  "FREE_5",
-  "FREE_6",
-  "FREE_7",
-  "FREE_8",
-  "COVERED_FREE_0",
-  "COVERED_FREE_1",
-  "COVERED_FREE_2",
-  "COVERED_FREE_3",
-  "COVERED_FREE_4",
-  "COVERED_FREE_5",
-  "COVERED_FREE_6",
-  "COVERED_FREE_7",
-  "COVERED_FREE_8",
-  "COVERED_MULTI_FREE",
-  "COVERED_MINE",
-  "PHANTOM_MINE",
-  "WRONGLY_MARKED_MINE",
-  "NOT_NECESSARILY_MINE",
-  "TRUE_MINE",
-];
 
 const Tile = ({
   coordinates,
@@ -67,16 +39,16 @@ const Tile = ({
   updateState,
 }) => {
   const tileRef = useRef(null);
+  const touchTimerRef = useRef(null);
   const [isLongPress, setIsLongPress] = useState(false);
-  let touchTimer = null;
 
   useEffect(() => {
     const tileElement = tileRef.current;
 
     const handleTouchStart = (e) => {
-      e.preventDefault();
       setIsLongPress(false);
-      touchTimer = setTimeout(() => {
+      e.preventDefault();
+      touchTimerRef.current = setTimeout(() => {
         setIsLongPress(true);
         const interaction = {
           row: coordinates.y,
@@ -84,7 +56,7 @@ const Tile = ({
           rightClick: true,
         };
         updateState(interaction);
-      }, 450);
+      }, 500);
     };
 
     const handleTouchEnd = (e) => {
@@ -92,8 +64,8 @@ const Tile = ({
         handleClick(e);
       }
       setIsLongPress(false);
-      if (touchTimer) {
-        clearTimeout(touchTimer);
+      if (touchTimerRef.current) {
+        clearTimeout(touchTimerRef.current);
       }
     };
 
@@ -112,7 +84,6 @@ const Tile = ({
 
   const handleClick = (e) => {
     if (!isLongPress) {
-      e.preventDefault();
       const interaction = {
         row: coordinates.y,
         col: coordinates.x,

@@ -81,7 +81,8 @@ function Game({ estate, board, start, onGameEnd }) {
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
           state={
-            gameEnded === "MSG_CONGRATULATIONS"
+            gameEnded === "MSG_CONGRATULATIONS" ||
+            gameEnded === "MSG_THAT_WAS_TOO_EASY"
               ? "win"
               : gameEnded === "MSG_STEPPED_ON_MINE" ||
                 gameEnded === "MSG_ILLEGAL_GUESS"

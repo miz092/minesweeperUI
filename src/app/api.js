@@ -5,7 +5,7 @@ export async function startGame() {
 
   try {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/start`, {
-      // const response = await fetch(`http://192.168.0.136:8080/play/start`, {
+      // const response = await fetch(`http://192.168.1.204:8080/play/start`, {
       method: 'GET',
       headers: {    'Access-Control-Allow-Origin':'*',
       'Access-Control-Allow-Methods':'GET,POST' }
@@ -33,7 +33,7 @@ export async function updateGameState(gameState, interaction) {
   let gameUpdateRequest = {};
   try {
     const response = await fetch(`https://justice-sweeper.onrender.com/play/interact`, {
-          //  const response = await fetch(`http://192.168.0.136:8080/play/interact`, {
+          //  const response = await fetch(`http://192.168.1.204:8080/play/interact`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json; charset=UTF-8",
