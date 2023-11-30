@@ -30,6 +30,7 @@ const fieldTypeToClassName = {
   NOT_NECESSARILY_MINE: "not_necessarily_mine",
   QUESTION_MARK: "question",
 };
+const tileToVibrate = ["covered", "flagged"];
 
 const Tile = ({
   coordinates,
@@ -41,6 +42,7 @@ const Tile = ({
   const tileRef = useRef(null);
   const touchTimerRef = useRef(null);
   const [isLongPress, setIsLongPress] = useState(false);
+  const field = fieldTypeToClassName[fieldType];
 
   useEffect(() => {
     const tileElement = tileRef.current;
@@ -55,8 +57,12 @@ const Tile = ({
           col: coordinates.x,
           rightClick: true,
         };
+        let shouldVibrate = tileToVibrate.includes(field);
+        if ("vibrate" in navigator && shouldVibrate) {
+          navigator.vibrate(50);
+        }
         updateState(interaction);
-      }, 500);
+      }, 350);
     };
 
     const handleTouchEnd = (e) => {
@@ -104,7 +110,6 @@ const Tile = ({
     updateState(interaction);
   };
 
-  const field = fieldTypeToClassName[fieldType];
   const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
 
   return (
