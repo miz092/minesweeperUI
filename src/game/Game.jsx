@@ -62,7 +62,6 @@ function Game({
   };
 
   const letsUpdateGameState = async (interaction) => {
-    console.log(gameFinished);
     if (gameFinished) return;
     if (timerStarted < 0 && !gameFinished) {
       setTimerStarted(Date.now());

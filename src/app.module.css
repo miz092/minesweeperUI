@@ -141,7 +141,7 @@ body{
     border-right-color: #808080; 
     width: auto;
     overflow-y: hidden;
-    max-width: 90vw; /* Maximum width */
+    max-width: 800px; /* Maximum width */
     max-height: 100vh; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;

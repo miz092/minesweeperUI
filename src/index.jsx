@@ -62,6 +62,7 @@ function Root() {
               <Window title="Minesweeper">
                 {gameState ? (
                   <Game
+                    onclick={() => setRestartGame(true)}
                     estate={gameState.engineState}
                     board={gameState.board}
                     start={start}
