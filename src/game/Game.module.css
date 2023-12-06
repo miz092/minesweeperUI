@@ -1,243 +1,348 @@
 .game {
-    background-color: #C0C0C0;
-    width: fit-content;
-    display: table;
-    border: 8px solid #C0C0C0;
-    padding: 5px;
+  background-color: #C0C0C0;
+  width: fit-content;
+  display: table;
+  border: 8px solid #C0C0C0;
+  padding: 5px;
+
 }
 
 .game-status {
-    padding: 12px 8px;
-    margin-bottom: 5px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+  padding: 10px 6px;
+  margin-bottom: 3px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .inner-border {
-    border-width: 3px;
-    border-style: solid;
-    border-top-color: #7B7B7B;
-    border-left-color: #7B7B7B;
-    border-bottom-color: white;
-    border-right-color: white;
+  border-width: 3px;
+  border-style: solid;
+  border-top-color: #7B7B7B;
+  border-left-color: #7B7B7B;
+  border-bottom-color: white;
+  border-right-color: white;
 }
 
 .outer-border {
-    border-width: 3px;
-    border-style: solid;
-    border-top-color: white;
-    border-left-color: white;
-    border-bottom-color: #7B7B7B;
-    border-right-color: #7B7B7B;
+  border-width: 3px;
+  border-style: solid;
+  border-top-color: white;
+  border-left-color: white;
+  border-bottom-color: #7B7B7B;
+  border-right-color: #7B7B7B;
 }
 
 .row {
-    display: flex;
-    flex-flow: row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
-  .tile {
-    width: 21px;
-    height: 21px;
-    display: inline-block;
-    cursor: pointer;
-    background-image: url('../sprites/tile_normal.png');
-    background-size: cover;
-    image-rendering: pixelated;
+.tile {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  cursor: pointer;
+  background-image: url('../sprites/tile_normal.png');
+  background-size: cover;
+  image-rendering: pixelated;
 }
 .tile.revealed_empty {
-  background-image: url('../sprites/tile_empty.png');   
+background-image: url('../sprites/tile_empty.png');   
 } 
 .tile.revealed_three {
-  background-image: url('../sprites/tile_three.png');  
+background-image: url('../sprites/tile_three.png');  
 } 
 .tile.revealed_four {
-  background-image: url('../sprites/tile_four.png');
+background-image: url('../sprites/tile_four.png');
 }
 .tile.revealed_one {
-    background-image: url('../sprites/tile_one.png');
-  }
+  background-image: url('../sprites/tile_one.png');
+}
 .tile.revealed_two {
-    background-image: url('../sprites/tile_two.png');  }
-  
+  background-image: url('../sprites/tile_two.png');  }
+
 .tile.revealed_five {
-    background-image: url('../sprites/tile_five.png');  }
-  
+  background-image: url('../sprites/tile_five.png');  }
+
 .tile.revealed_six {
-    background-image: url('../sprites/tile_six.png');  }
-  
+  background-image: url('../sprites/tile_six.png');  }
+
 .tile.revealed_seven {
-    background-image: url('../sprites/tile_seven.png');  }
-  
+  background-image: url('../sprites/tile_seven.png');  }
+
 .tile.revealed_eight {
-    background-image: url('../sprites/tile_eight.png');  }
-  
+  background-image: url('../sprites/tile_eight.png');  }
+
 .tile.flagged {
-    background-image: url('../sprites/tile_flagged.png');  }
-  
-  
+  background-image: url('../sprites/tile_flagged.png');  }
+
+
 .tile.revealed_mine {
-    background-image: url('../images/truemine.PNG');
-  }
-  
+  background-image: url('../images/truemine.png');
+}
+
 .tile.covered {
-    background-image: url('../sprites/tile_normal.png');  }
+  background-image: url('../sprites/tile_normal.png');  }
 
-  .tile.covered_empty {
-    background-image: url('../images/coveredfree0.PNG');  }
-  
-  .tile.covered_one {
-    background-image: url('../images/coveredfree1.PNG');
-  }
-  
-  .tile.covered_two {
-    background-image: url('../images/coveredfree2.PNG');
-  }
-  
-  .tile.covered_three {
-    background-image: url('../images/coveredfree3.PNG');
-  }
-  
-  .tile.covered_four {
-    background-image: url('../images/coveredfree4.PNG');
-  }
-  
-  .tile.covered_five {
-    background-image: url('../images/coveredfree5.PNG');
-  }
-  
-  .tile.covered_six {
-    background-image: url('../images/coveredfree6.PNG');
-  }
-  
-  .tile.covered_seven {
-    background-image: url('../images/coveredfree7.PNG')
-  }
-  
-  .tile.covered_eight {
-    background-image: url('../images/coveredfree8.PNG');  }
-  
-  .tile.covered_multi-free {
-    background-image: url('../images/coveredmultifree.PNG');  }
-  
-  .tile.covered_mine {
-    background-image: url('../images/coveredmine.PNG');  }
-  
-  .tile.phantom_mine {
-    background-image: url('../images/phantommine.PNG');  }
-  
-  .tile.wrongly_marked_mine {
-    background-image: url('../images/wronglymarkedmine.PNG');  }
-  
-  .tile.not_necessarily_mine {
-    background-image: url('../images/notnecessarilymine.PNG');  }
+.tile.covered_empty {
+  background-image: url('../images/coveredfree0.png');  }
 
-    .tile.marked_mine {
-      background-image: url('../sprites/tile_bomb_defused.png ');  }
-  
+.tile.covered_one {
+  background-image: url('../images/coveredfree1.png');
+}
+
+.tile.covered_two {
+  background-image: url('../images/coveredfree2.png');
+}
+
+.tile.covered_three {
+  background-image: url('../images/coveredfree3.png');
+}
+
+.tile.covered_four {
+  background-image: url('../images/coveredfree4.png');
+}
+
+.tile.covered_five {
+  background-image: url('../images/coveredfree5.png');
+}
+
+.tile.covered_six {
+  background-image: url('../images/coveredfree6.png');
+}
+
+.tile.covered_seven {
+  background-image: url('../images/coveredfree7.png')
+}
+
+.tile.covered_eight {
+  background-image: url('../images/coveredfree8.png');  }
+
+.tile.covered_multi-free {
+  background-image: url('../images/coveredmultifree.png');  }
+
+.tile.covered_mine {
+  background-image: url('../images/coveredmine.png');  }
+
+.tile.phantom_mine {
+  background-image: url('../images/phantommine.png');  }
+
+.tile.wrongly_marked_mine {
+  background-image: url('../images/wronglymarkedmine.png');  }
+
+.tile.not_necessarily_mine {
+  background-image: url('../images/notnecessarilymine.png');  }
+
+  .tile.marked_mine {
+    background-image: url('../sprites/tile_bomb_defused.png ');  }
+
 
 .tile.question {
-    background-image: url('../sprites/tile_question.png');
+  background-image: url('../sprites/tile_question.png');
 }
 
 
 
 .tile.revealed.mine.caused-game-end {
-    background-image: url('../sprites/tile_bomb_red.png');
+  background-image: url('../sprites/tile_bomb_red.png');
 }
 
-.digits-display {
-    height: 23px;
-}
+/* .digits-display {
+  height: 23px;
+} */
 
 .digits, .digits.zero {
-    width: 13px;
-    height: 23px;
-    display: inline-block;
-    background-image: url('../sprites/display_zero.png');
-    image-rendering: pixelated;
+  width: 13px;
+  height: 23px;
+  display: inline-block;
+  background-image: url('../sprites/display_zero.png');
+  image-rendering: pixelated;
 }
 
 .digits.one {
-    background-image: url('../sprites/display_one.png');
+  background-image: url('../sprites/display_one.png');
 }
 
 .digits.two {
-    background-image: url('../sprites/display_two.png');
+  background-image: url('../sprites/display_two.png');
 }
 
 .digits.three {
-    background-image: url('../sprites/display_three.png');
+  background-image: url('../sprites/display_three.png');
 }
 
 .digits.four {
-    background-image: url('../sprites/display_four.png');
+  background-image: url('../sprites/display_four.png');
 }
 
 .digits.five {
-    background-image: url('../sprites/display_five.png');
+  background-image: url('../sprites/display_five.png');
 }
 
 .digits.six {
-    background-image: url('../sprites/display_six.png');
+  background-image: url('../sprites/display_six.png');
 }
 
 .digits.seven {
-    background-image: url('../sprites/display_seven.png');
+  background-image: url('../sprites/display_seven.png');
 }
 
 .digits.eight {
-    background-image: url('../sprites/display_eight.png');
+  background-image: url('../sprites/display_eight.png');
 }
 
 .digits.nine {
-    background-image: url('../sprites/display_nine.png');
+  background-image: url('../sprites/display_nine.png');
 }
 
 .smiley {
-    width: 26px;
-    height: 26px;
-    image-rendering: pixelated;
-    background-image: url('../sprites/smiley_normal.png');
+  width: 26px;
+  height: 26px;
+  image-rendering: pixelated;
+  background-image: url('../sprites/smiley_normal.png');
 }
 
 .smiley:active {
-    background-image: url('../sprites/smiley_pressed.png') !important;
+  background-image: url('../sprites/smiley_pressed.png') !important;
 }
 
 .smiley.scared {
-    background-image: url('../sprites/smiley_scared.png');
+  background-image: url('../sprites/smiley_scared.png');
 }
 
 .smiley.win {
-    background-image: url('../sprites/smiley_win.png');
+  background-image: url('../sprites/smiley_win.png');
 }
 
 .smiley.lose {
-    background-image: url('../sprites/smiley_lose.png');
+  background-image: url('../sprites/smiley_lose.png');
 }
 
-@media screen and (min-width: 768px) {
-    .tile {
-        width: 32px;
-        height: 32px;
-    }
 
-    .digits-display {
-        height: 46px;
-    }
+.digits-display {
+height: 46px;
+}
 
-    .digits, .digits.zero {
-        height: 46px;
-        width: 26px;
-        background-size: cover;
-    }
+.digits, .digits.zero {
+height: 46px;
+width: 26px;
+background-size: cover;
+}
 
-    .smiley {
-        width: 52px;
-        height: 52px;
-        background-size: cover;
-    }
+.smiley {
+width: 52px;
+height: 52px;
+background-size: cover;
+}
+@media screen and (max-width: 420px) {
+  .tile {
+      width: 18px;
+      height: 18px;
+  }
+
+  .inner-border{
+      border-width: 1.5px;   
+      border-style: solid;
+      border-top-color: #7B7B7B;
+      border-left-color: #7B7B7B;
+      border-bottom-color: white;
+      border-right-color: white;   
+  }
+  .outer-border{
+    border-width: 1.5px;
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: white;
+    border-bottom-color: #7B7B7B;
+    border-right-color: #7B7B7B;
+  }
+  .digits-display {
+      height: 40px;
+  }
+
+  .digits, .digits.zero {
+      height: 40px;
+      width: 20px;
+      background-size: cover;
+  }
+
+  .smiley {
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+  }
+}
+
+@media screen and (max-height:850px) {
+.tile {
+    width: 17px;
+    height: 17px;
+}
+
+.digits-display {
+    height: 40px;
+}
+
+.digits, .digits.zero {
+    height: 40px;
+    width: 20px;
+    background-size: cover;
+}
+
+.smiley {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+}
+}
+@media screen and (max-height:570px) {
+.tile {
+    width: 15px;
+    height: 15px;
+}
+
+.digits-display {
+    height: 40px;
+}
+
+.digits, .digits.zero {
+    height: 40px;
+    width: 20px;
+    background-size: cover;
+}
+
+.smiley {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+}
+}
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar {
+
+  font-size: 20px;
+  margin: 0.5em 0;
+  max-height: 60vh;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  overflow-y: auto; /* Keep vertical scrolling */
+}
+
+.about {
+
+  font-size: 20px;  
+  margin: 0.5em 0;  
+  max-height: 60vh; 
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+  overflow-y: auto; 
+  overflow: scroll;
+}
+.about::-webkit-scrollbar {
+  display: none; ;
 }

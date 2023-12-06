@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
-
 import styles from "./Game.module.css";
 import Tile from "./Tile";
 import DigitsDisplay from "./DigitsDisplay";
 import Smiley from "./Smiley";
 import { updateGameState } from "../app/api.js";
 
-function Game({ estate, board, start, onGameEnd }) {
-  const [restartGame, setRestartGame] = useState(false);
+function Game({
+  estate,
+  board,
+  start,
+  onGameEnd,
+  setRestartGame,
+  restartGame,
+  gameEnded,
+  setGameEnded,
+  gameFinished,
+  setGameFinished,
+}) {
   const [mouseDownOnTile, setMouseDownOnTile] = useState(false);
   const [timerStarted, setTimerStarted] = useState(-1);
   const [timeToDisplay, setTimeToDisplay] = useState(0);
@@ -15,7 +24,6 @@ function Game({ estate, board, start, onGameEnd }) {
   const [currentEstate, setCurrentEstate] = useState(estate);
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
   const [markedCount, setMarkedCount] = useState(estate?.markedCount);
-  const [gameEnded, setGameEnded] = useState("MSG_CONTINUE");
 
   const timer = () => {
     let interval = null;
@@ -39,19 +47,24 @@ function Game({ estate, board, start, onGameEnd }) {
   }, [restartGame]);
 
   const resetGame = () => {
-    setTimeToDisplay(0);
-    setTimerStarted(-1);
-    setRestartGame(false);
-    start();
-    setCurrentboard(board);
-    setCurrentEstate(estate);
-    setRemainingMines(estate?.mineCount);
-    setMarkedCount(estate?.markedCount);
-    setGameEnded("MSG_CONTINUE");
+    if (restartGame) {
+      setTimeToDisplay(0);
+      setTimerStarted(-1);
+      setRestartGame(false);
+      start();
+      setGameFinished(false);
+      setCurrentboard(board);
+      setCurrentEstate(estate);
+      setRemainingMines(estate?.mineCount);
+      setMarkedCount(estate?.markedCount);
+      setGameEnded("MSG_CONTINUE");
+    }
   };
 
   const letsUpdateGameState = async (interaction) => {
-    if (timerStarted < 0) {
+    console.log(gameFinished);
+    if (gameFinished) return;
+    if (timerStarted < 0 && !gameFinished) {
       setTimerStarted(Date.now());
     }
     let gameState = { board: currentBoard, engineState: currentEstate };
@@ -75,6 +88,7 @@ function Game({ estate, board, start, onGameEnd }) {
       console.error("Error updating game state:", error);
     }
   };
+
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
@@ -91,7 +105,7 @@ function Game({ estate, board, start, onGameEnd }) {
               ? "scared"
               : "normal"
           }
-          onReset={resetGame}
+          onReset={() => setRestartGame(true)}
         />
         <DigitsDisplay digits={3} value={timeToDisplay} />
       </div>

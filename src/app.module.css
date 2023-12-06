@@ -16,6 +16,8 @@ body{
 
 .app {
 
+    overflow: scroll  ;
+    overflow-x: hidden;
     background-color: #008080;
     width: 100vw;
     height: 100vh;
@@ -24,7 +26,9 @@ body{
     justify-content: center;
     align-items: center;
 }
-
+.app::-webkit-scrollbar {
+    display: none;
+  }
 .app .game {
     transform: scale(2);
 }
@@ -76,10 +80,8 @@ body{
 }
 .modal {
     z-index: 101;
-
     padding: 3px;
     background-color: #BFBFBF;
-
     border-width: 3px;
     border-style: solid;
     border-top-color: white;
@@ -87,9 +89,16 @@ body{
     border-bottom-color: #808080;
     border-right-color: #808080; 
     width: auto;
-    box-shadow:
-         -1px -1px 0 1px #BFBFBF, 
-         0px 0px 0 2px black;
+   
+    max-width: 90vw; /* Maximum width */
+    max-height: 90vh; /* Maximum height */
+    box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
+    box-sizing: border-box;
+
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); 
 }
 
 .modal .title {
@@ -121,21 +130,24 @@ body{
 }
 
 .window {
-    z-index: 1;
-
+    z-index: 100;
     padding: 3px;
     background-color: #BFBFBF;
-
     border-width: 3px;
     border-style: solid;
     border-top-color: white;
     border-left-color: white;
     border-bottom-color: #808080;
     border-right-color: #808080; 
+    width: auto;
+    overflow-y: hidden;
+    max-width: 90vw; /* Maximum width */
+    max-height: 100vh; /* Maximum height */
+    box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
+    box-sizing: border-box;
 
-    box-shadow:
-         -1px -1px 0 1px #BFBFBF, 
-         0px 0px 0 2px black;
+
+      
 }
 
 .window .title {
@@ -152,6 +164,7 @@ body{
 
 .window>*:not(.title) {
     padding: 3px 8px;
+   
 }
 
 .window>*:not(.title) * {
@@ -164,3 +177,4 @@ body{
     background-image: url('./sprites/close_button.png');
     background-size: contain;
 }
+
