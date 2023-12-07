@@ -1,5 +1,6 @@
 let viseString = "http://192.168.1.93:8080"
 let homeString = "http://192.168.0.136:8080"
+let officeString = "http://192.168.1.204:8080"
 let onlineString = "https://justice-sweeper.onrender.com"
 export async function startGame(orientation) {
   try {

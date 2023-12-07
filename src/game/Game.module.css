@@ -40,8 +40,11 @@
 }
 
 .tile {
-  width: 25px;
-  height: 25px;
+  width: 5dvw; /* 5% of the viewport width */
+  height: 5dvw;
+  max-width: 25px;
+  max-height: 25px;
+/* margin-block: 1px; */
   display: inline-block;
   cursor: pointer;
   background-image: url('../sprites/tile_normal.png');
@@ -238,8 +241,8 @@ background-size: cover;
 }
 @media screen and (max-width: 420px) {
   .tile {
-      width: 18px;
-      height: 18px;
+    width: 5vw; /* 5% of the viewport width */
+  height: 5vw;
   }
 
   .inner-border{
@@ -276,9 +279,13 @@ background-size: cover;
 }
 
 @media screen and (max-height:850px) {
+  .app{
+    width: 110dvw;
+    height: 110dvh;
+  }
 .tile {
-    width: 17px;
-    height: 17px;
+  width: 5dvw; /* 5% of the viewport width */
+  height: 5dvw;
 }
 
 .digits-display {
@@ -299,8 +306,8 @@ background-size: cover;
 }
 @media screen and (max-height:570px) {
 .tile {
-    width: 15px;
-    height: 15px;
+  width: 5dvw; /* 5% of the viewport width */
+  height: 5dvw;
 }
 
 .digits-display {
@@ -327,7 +334,7 @@ background-size: cover;
 
   font-size: 20px;
   margin: 0.5em 0;
-  max-height: 60vh;
+  max-height: 60dvh;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   overflow-y: auto; /* Keep vertical scrolling */
@@ -337,7 +344,7 @@ background-size: cover;
 
   font-size: 20px;  
   margin: 0.5em 0;  
-  max-height: 60vh; 
+  max-height: 60dvh; 
   -ms-overflow-style: none; 
   scrollbar-width: none;  
   overflow-y: auto; 
@@ -345,4 +352,8 @@ background-size: cover;
 }
 .about::-webkit-scrollbar {
   display: none; ;
+}
+
+.loadingCursor {
+  cursor: wait;
 }

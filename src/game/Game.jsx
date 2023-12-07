@@ -4,6 +4,7 @@ import Tile from "./Tile";
 import DigitsDisplay from "./DigitsDisplay";
 import Smiley from "./Smiley";
 import { updateGameState } from "../app/api.js";
+import Loading from "../Loading.jsx";
 
 function Game({
   estate,
@@ -24,6 +25,7 @@ function Game({
   const [currentEstate, setCurrentEstate] = useState(estate);
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
   const [markedCount, setMarkedCount] = useState(estate?.markedCount);
+  const [isLoading, setIsLoading] = useState(false);
 
   const timer = () => {
     let interval = null;
@@ -62,10 +64,15 @@ function Game({
   };
 
   const letsUpdateGameState = async (interaction) => {
-    if (gameFinished) return;
+    if (gameFinished || isLoading) {
+      console.log("disallowed click");
+      console.log("loading", isLoading);
+      return;
+    }
     if (timerStarted < 0 && !gameFinished) {
       setTimerStarted(Date.now());
     }
+    setIsLoading(true);
     let gameState = { board: currentBoard, engineState: currentEstate };
 
     try {
@@ -82,14 +89,17 @@ function Game({
 
           setTimerStarted(-1);
         }
+        setIsLoading(false);
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("Error updating game state:", error);
     }
   };
 
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
+      <Loading isLoading={isLoading} />
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
@@ -110,7 +120,7 @@ function Game({
       </div>
       <div className={styles["inner-border"]}>
         {currentBoard.map((row, y) => (
-          <div key={`row-${y}`} className={styles["row"]}>
+          <div key={`row-${y}`} className={`${styles["row"]}`}>
             {row.map((tile, x) => (
               <Tile
                 coordinates={{ x, y }}
@@ -120,6 +130,7 @@ function Game({
                 onMouseUp={(e) => e.button === 0 && setMouseDownOnTile(false)}
                 key={`${y}-${x}`}
                 updateState={letsUpdateGameState}
+                isLoading={isLoading}
               />
             ))}
           </div>

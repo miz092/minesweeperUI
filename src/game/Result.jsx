@@ -53,8 +53,8 @@ function Result({ gameMessage }) {
   return (
     <div
       style={{
-        maxWidth: "30vw",
         minWidth: "300px",
+        maxWidth: "80dvw",
         boxSizing: "border-box",
         padding: "10px",
         margin: "auto",
@@ -62,7 +62,7 @@ function Result({ gameMessage }) {
     >
       <img
         src={iconToUse || minesweeperIcon}
-        style={{ width: "75px", margin: "10px auto", display: "block" }}
+        style={{ width: "55px", margin: "10px auto", display: "block" }}
         alt="Game"
       ></img>
       <h1

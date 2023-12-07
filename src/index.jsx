@@ -1,6 +1,7 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, useRef } from "react";
+import Loading from "./Loading.jsx";
 import App from "./App.jsx";
 import Window from "./Window.jsx";
 import Modal from "./Modal.jsx";
@@ -11,11 +12,11 @@ import { startGame } from "./app/api.js";
 
 function Root() {
   const [gameState, setGameState] = useState(null);
-  const [gameFinished, setGameFinished] = useState(false); // Initialize as false
+  const [gameFinished, setGameFinished] = useState(false);
   const [gameMessage, setGameMessage] = useState("");
   const [restartGame, setRestartGame] = useState(false);
   const [gameEnded, setGameEnded] = useState("MSG_CONTINUE");
-  const [isModalOpen, setIsModalOpen] = useState(false); // New state for modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const orientationRef = useRef(null);
   useEffect(() => {
@@ -38,7 +39,7 @@ function Root() {
     ) {
       setRestartGame(true);
     }
-    setIsModalOpen(false); // Reset to false when the modal is closed
+    setIsModalOpen(false);
 
     setGameMessage("");
   };
@@ -62,7 +63,6 @@ function Root() {
               <Window title="Minesweeper">
                 {gameState ? (
                   <Game
-                    onclick={() => setRestartGame(true)}
                     estate={gameState.engineState}
                     board={gameState.board}
                     start={start}
@@ -75,7 +75,7 @@ function Root() {
                     setGameFinished={setGameFinished}
                   />
                 ) : (
-                  <div>Loading...</div>
+                  <Loading isLoading={true} />
                 )}
               </Window>
             }
