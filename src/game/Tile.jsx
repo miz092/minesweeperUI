@@ -177,7 +177,7 @@ const fieldData = [
   {
     name: "COVERED_MULTI_FREE",
     data: {
-      lowercaseName: "covered_multi_free",
+      lowercaseName: "covered_multi-free",
       description:
         "This field is empty but the number on it could not be determined. These are the actual fields you must eliminate before you are allowed to guess - mere empty fields with a single number on them do not stop you from guessing.",
       hasDescription: true,
@@ -364,7 +364,7 @@ const Tile = ({
           <p style={{ fontSize: "1.3rem" }}>{description}</p>
         )
       }
-      placement="top"
+      placement="middle"
       TransitionComponent={Grow}
       TransitionProps={{ timeout: 600 }}
       // enterDelay={200}
