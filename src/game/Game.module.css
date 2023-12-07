@@ -357,3 +357,10 @@ background-size: cover;
 .loadingCursor {
   cursor: wait;
 }
+.result{
+box-sizing: border-box;
+max-width: 65dvw;
+min-width: 20dvw;
+padding: 10px;
+margin: auto
+}

@@ -91,7 +91,7 @@ body{
     border-right-color: #808080; 
     width: auto;
    
-    max-width: 95dvw; /* Maximum width */
+    max-width: 50dvw; /* Maximum width */
     max-height: 95dvh; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
@@ -199,3 +199,26 @@ body{
     width:200px;   
     height: 200px;  
   }
+
+
+  @media screen and (max-width:900px) {
+
+  .modal {
+    z-index: 101;
+    padding: 3px;
+    background-color: #BFBFBF;
+    border-width: 3px;
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: white;
+    border-bottom-color: #808080;
+    border-right-color: #808080; 
+    width: auto;
+   
+    max-width: 85dvw; /* Maximum width */
+    max-height: 95dvh; /* Maximum height */
+    box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
+    box-sizing: border-box;
+
+}
+}
