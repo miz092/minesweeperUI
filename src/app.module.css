@@ -120,8 +120,8 @@ body{
 
 .modal .close-modal-button {
     cursor: pointer;
-    width: 20px;
-    height: 18px;
+    width: 25px;
+    height: 23px;
     background-image: url('./sprites/close_button.png');
     background-size: cover;
 }
@@ -169,8 +169,8 @@ body{
 }
 
 .window .close-window-button {
-    width: 20px;
-    height: 18px;
+    width: 25px;
+    height: 22px;
     background-image: url('./sprites/close_button.png');
     background-size: cover;
 }

@@ -60,8 +60,8 @@ function Root() {
           <Route
             path="/minesweeper"
             element={
-              <Window title="Minesweeper">
-                {gameState ? (
+              gameState ? (
+                <Window title="Minesweeper">
                   <Game
                     estate={gameState.engineState}
                     board={gameState.board}
@@ -74,10 +74,10 @@ function Root() {
                     gameFinished={gameFinished}
                     setGameFinished={setGameFinished}
                   />
-                ) : (
-                  <Loading isLoading={true} />
-                )}
-              </Window>
+                </Window>
+              ) : (
+                <Loading isLoading={true} />
+              )
             }
           />
           <Route
