@@ -364,7 +364,7 @@ const Tile = ({
           <p style={{ fontSize: "1.3rem" }}>{description}</p>
         )
       }
-      placement="middle"
+      placement="top"
       TransitionComponent={Grow}
       TransitionProps={{ timeout: 600 }}
       // enterDelay={200}
