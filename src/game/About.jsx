@@ -9,7 +9,7 @@ import styles from "./Game.module.css";
 
 function AboutPage() {
   return (
-    <div style={{ maxWidth: "90vw", display: "flex", flexDirection: "column" }}>
+    <div className="about">
       <img
         src={minesweeperIcon}
         style={{ width: "75px", margin: "auto", display: "block" }}
@@ -27,8 +27,16 @@ function AboutPage() {
           intellectually stimulating.
         </p>
 
-        <p style={{ textAlign: "left" }}>Iconography:</p>
-        <ul style={{ width: "auto" }}>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "1.8rem",
+            fontWeight: "bold",
+          }}
+        >
+          Iconography
+        </p>
+        <div style={{ maxWidth: "100%" }}>
           <li className={styles.imageContainer}>
             {" "}
             <div>This field was marked as a mine but it was empty.</div>
@@ -41,7 +49,12 @@ function AboutPage() {
             </div>
           </li>
           <li className={styles.imageContainer}>
-            <div>This field was marked as a mine but it was empty.</div>
+            <div>
+              This field is empty but the number on it could not be determined.
+              These are the actual fields you must eliminate before you are
+              allowed to guess - mere empty fields with a single number on them
+              do not stop you from guessing.
+            </div>
             <div>
               <img
                 src={coveredMulti}
@@ -51,7 +64,10 @@ function AboutPage() {
             </div>
           </li>
           <li className={styles.imageContainer}>
-            <div>This field was marked as a mine but it was empty.</div>
+            <div>
+              This field was marked as a mine and it could have held a mine but
+              it could have been empty as well.{" "}
+            </div>
             <div>
               <img
                 src={notNecessarily}
@@ -61,13 +77,19 @@ function AboutPage() {
             </div>
           </li>
           <li className={styles.imageContainer}>
-            <div>This field was marked as a mine but it was empty.</div>
+            <div>
+              This field held a mine and you (or the automatic assistant on your
+              behalf) stepped on it.
+            </div>
             <div>
               <img src={trueMine} style={{ width: "75px" }} alt="True mine" />
             </div>
           </li>
           <li className={styles.imageContainer}>
-            <div>This field was marked as a mine but it was empty.</div>
+            <div>
+              You (or the automatic assistant) guessed by stepping on this
+              field, but you weren't allowed to guess, so you got mined!
+            </div>
             <div>
               <img
                 src={phantomMine}
@@ -76,9 +98,9 @@ function AboutPage() {
               />
             </div>
           </li>
-        </ul>
-        <p>ALL RIGHTS RESERVED SZÖVEG JÖHET IDE</p>
+        </div>
       </div>
+      <p>ALL RIGHTS RESERVED SZÖVEG JÖHET IDE</p>
     </div>
   );
 }
