@@ -95,7 +95,7 @@ const fieldData = [
   {
     name: "TRUE_MINE",
     data: {
-      lowercaseName: "true_mine",
+      lowercaseName: "revealed_mine",
       description:
         "This field held a mine and you (or the automatic assistant on your behalf) stepped on it.",
       hasDescription: true,
@@ -261,8 +261,8 @@ const Tile = ({
   const tileRef = useRef(null);
   const updateTimerRef = useRef(null);
   const vibrationTimerRef = useRef(null);
-  const [isLongPress, setIsLongPress] = useState(false);
-
+  // const [isLongPress, setIsLongPress] = useState(false);
+  const longPressRef = useRef(false);
   const field = fieldTypeToClassName[fieldType];
   // const description = fieldTypeToDescription[fieldType];
 
@@ -275,12 +275,14 @@ const Tile = ({
 
     const handleTouchStart = (e) => {
       if (isLoading) return;
-      setIsLongPress(false);
+      longPressRef.current = false;
 
-      e.preventDefault();
+      if (e.cancelable) {
+        e.preventDefault();
+      }
 
       updateTimerRef.current = setTimeout(() => {
-        setIsLongPress(true);
+        longPressRef.current = true;
         const interaction = {
           row: coordinates.y,
           col: coordinates.x,
@@ -294,7 +296,7 @@ const Tile = ({
         if ("vibrate" in navigator && shouldVibrate) {
           navigator.vibrate(50);
         }
-      }, 450);
+      }, 500);
     };
 
     const handleTouchEnd = (e) => {
@@ -305,11 +307,9 @@ const Tile = ({
         clearTimeout(vibrationTimerRef.current);
       }
 
-      if (!isLongPress) {
+      if (!longPressRef.current) {
         handleClick(e);
       }
-
-      setIsLongPress(false);
     };
 
     tileElement.addEventListener("touchstart", handleTouchStart, {
@@ -323,14 +323,12 @@ const Tile = ({
       tileElement.removeEventListener("touchstart", handleTouchStart);
       tileElement.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [updateState, coordinates, field]);
+  }, [updateState, coordinates, lowercaseName]);
 
   const handleClick = (e) => {
-    if (isLoading) {
-      console.log("disallowed click");
-      return;
-    }
-    if (!isLongPress) {
+    if (isLoading) return;
+    if (!longPressRef.current) {
+      console.log("short press");
       const interaction = {
         row: coordinates.y,
         col: coordinates.x,
@@ -342,7 +340,6 @@ const Tile = ({
   };
 
   const handleRightClick = (e) => {
-    if (isLoading) return;
     e.preventDefault();
     const interaction = {
       row: coordinates.y,
@@ -361,7 +358,11 @@ const Tile = ({
       followCursor
       title={
         gameEnded === "MSG_CONTINUE" ? null : (
-          <p style={{ fontSize: "1.3rem" }}>{description}</p>
+          <p
+            style={{ fontSize: "1.3rem", margin: "5px", lineHeight: "1.5rem" }}
+          >
+            {description}
+          </p>
         )
       }
       placement="top"
