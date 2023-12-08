@@ -66,7 +66,16 @@ function Result({ gameMessage }) {
       >
         {titleToshow}
       </h1>
-      <p className={styles["scrollbar"]}>{messageToShow}</p>
+      <p
+        style={{
+          margin: "0.5rem",
+          marginBottom: "1.7rem",
+          marginTop: "1.7rem",
+        }}
+        className={styles["scrollbar"]}
+      >
+        {messageToShow}
+      </p>
     </div>
   );
 }
