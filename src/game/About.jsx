@@ -99,7 +99,22 @@ function AboutPage() {
             </div>
           </li>
         </div>
-        <p style={{ display: "block" }}>ALL RIGHTS RESERVED SZÖVEG JÖHET IDE</p>
+        <p
+          style={{
+            textAlign: "center",
+            margin: "1rem",
+            padding: "0.3rem",
+            lineHeight: "1.5rem",
+          }}
+        >
+          Original Minesweeper concept and implementation (c) 1985 Microsoft
+          Corporation
+          <br />
+          Justice Minesweeper engine concept and implementation (c) 1999-2023
+          Zoltán S. Márk
+          <br />
+          Web UI implementation (c) 2023 Brickz Technologies Hungary Ltd.
+        </p>
       </div>
     </div>
   );

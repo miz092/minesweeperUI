@@ -9,7 +9,7 @@ const Loading = ({ isLoading }) => {
 
   return (
     <div className={styles.overlay}>
-      <img src={Hourglass} alt="Loading..." className={styles.loadingGif} />
+      <img src={Hourglass} alt="Loading..." className={styles.loading} />
     </div>
   );
 };

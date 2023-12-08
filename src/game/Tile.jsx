@@ -338,8 +338,6 @@ const Tile = ({
       placement="top"
       TransitionComponent={Grow}
       TransitionProps={{ timeout: 600 }}
-      // enterDelay={200}
-      // leaveDelay={500}
     >
       <div
         ref={tileRef}

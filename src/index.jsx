@@ -52,7 +52,12 @@ function Root() {
       console.error("Error fetching game state:", error);
     }
   }
-
+  const gameMessageTitles = {
+    MSG_CONGRATULATIONS: "Nice job! You won!",
+    MSG_STEPPED_ON_MINE: "Oops! You stepped on a mine!",
+    MSG_ILLEGAL_GUESS: "Illegal guess!",
+    MSG_THAT_WAS_TOO_EASY: "That was too easy! Try again!",
+  };
   return (
     <Router>
       <Routes>
@@ -99,10 +104,7 @@ function Root() {
         </Route>
       </Routes>
       {isModalOpen && (
-        <Modal
-          title={gameFinished === "win" ? "Congratulations" : "Game Over"}
-          onClose={closeModal}
-        >
+        <Modal title={gameMessageTitles[gameMessage]} onClose={closeModal}>
           <Result gameMessage={gameMessage} />
         </Modal>
       )}
