@@ -273,8 +273,8 @@ margin: 0.5em 0;
   font-size: 20px;  
   margin: 0.5em 0;
   max-width: 65dvw;
-  max-height: 75dvh; /* changed from 75dvw to 75dvh for vertical height */
-  overflow-y: auto; /* only necessary overflow property */
+  max-height: 75dvh; 
+  overflow-y: auto; 
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -283,6 +283,12 @@ margin: 0.5em 0;
 }
 .innerAbout > * {
   flex-shrink: 0;
+}
+.innerAbout li{
+  list-style-type: none;
+  margin: 5px;
+  padding: 0;
+
 }
 
 .innerAbout::-webkit-scrollbar {
