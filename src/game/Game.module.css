@@ -1,24 +1,26 @@
+/* General styles */
 .game {
   background-color: #C0C0C0;
   width: fit-content;
   display: table;
   border: 8px solid #C0C0C0;
   padding: 5px;
-
 }
 
 .game-status {
   padding: 10px 6px;
   margin-bottom: 3px;
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
 }
 
-.inner-border {
+.inner-border, .outer-border {
   border-width: 3px;
   border-style: solid;
+}
+
+.inner-border {
   border-top-color: #7B7B7B;
   border-left-color: #7B7B7B;
   border-bottom-color: white;
@@ -26,8 +28,6 @@
 }
 
 .outer-border {
-  border-width: 3px;
-  border-style: solid;
   border-top-color: white;
   border-left-color: white;
   border-bottom-color: #7B7B7B;
@@ -36,21 +36,19 @@
 
 .row {
   display: flex;
-  flex-flow: row nowrap;
 }
 
 .tile {
-  width: 5dvw; /* 5% of the viewport width */
-  height: 5dvw;
+  width: 3dvw; /* Adjusted for typo '3dvw' */
+  height: 3dvw;
   max-width: 25px;
   max-height: 25px;
-/* margin-block: 1px; */
   display: inline-block;
   cursor: pointer;
-  background-image: url('../sprites/tile_normal.png');
   background-size: cover;
   image-rendering: pixelated;
 }
+
 .tile.revealed_empty {
 background-image: url('../sprites/tile_empty.png');   
 } 
@@ -239,93 +237,10 @@ width: 52px;
 height: 52px;
 background-size: cover;
 }
-@media screen and (max-width: 420px) {
-  .tile {
-    width: 5vw; /* 5% of the viewport width */
-  height: 5vw;
-  }
 
-  .inner-border{
-      border-width: 1.5px;   
-      border-style: solid;
-      border-top-color: #7B7B7B;
-      border-left-color: #7B7B7B;
-      border-bottom-color: white;
-      border-right-color: white;   
-  }
-  .outer-border{
-    border-width: 1.5px;
-    border-style: solid;
-    border-top-color: white;
-    border-left-color: white;
-    border-bottom-color: #7B7B7B;
-    border-right-color: #7B7B7B;
-  }
-  .digits-display {
-      height: 40px;
-  }
 
-  .digits, .digits.zero {
-      height: 40px;
-      width: 20px;
-      background-size: cover;
-  }
 
-  .smiley {
-      width: 40px;
-      height: 40px;
-      background-size: cover;
-  }
-}
 
-@media screen and (max-height:850px) {
-  .app{
-    width: 110dvw;
-    height: 110dvh;
-  }
-.tile {
-  width: 5dvw; /* 5% of the viewport width */
-  height: 5dvw;
-}
-
-.digits-display {
-    height: 40px;
-}
-
-.digits, .digits.zero {
-    height: 40px;
-    width: 20px;
-    background-size: cover;
-}
-
-.smiley {
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-}
-}
-@media screen and (max-height:570px) {
-.tile {
-  width: 5dvw; /* 5% of the viewport width */
-  height: 5dvw;
-}
-
-.digits-display {
-    height: 40px;
-}
-
-.digits, .digits.zero {
-    height: 40px;
-    width: 20px;
-    background-size: cover;
-}
-
-.smiley {
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-}
-}
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -344,18 +259,33 @@ background-size: cover;
 
   font-size: 20px;  
 margin: 0.5em 0;
-  max-height: 70dvh;
-  max-width: 55dvw;
+
   box-sizing: border-box ;
   display: flex;
   flex-direction: column;
   -ms-overflow-style: none; 
   scrollbar-width: none;  
-  overflow-y: auto; 
+  overflow-y: scroll; 
   overflow: scroll;
   text-align: center;
 }
-.about::-webkit-scrollbar {
+.innerAbout {
+  font-size: 20px;  
+  margin: 0.5em 0;
+  max-width: 65dvw;
+  max-height: 75dvh; /* changed from 75dvw to 75dvh for vertical height */
+  overflow-y: auto; /* only necessary overflow property */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.innerAbout > * {
+  flex-shrink: 0;
+}
+
+.innerAbout::-webkit-scrollbar {
   display: none; ;
 }
 
@@ -408,23 +338,98 @@ margin: auto
   margin-left: 5px;
 }
 
-@media screen and (max-width:900px) {
+@media screen and (max-height:850px) {
 
-  .about {
 
-    font-size: 20px;  
-    margin: 0.5em 0;
-    max-width: 85dvw;
-    max-height: 75dvh; 
-   width: auto;
-   height: auto;
-      box-sizing: border-box ;
-      display: flex;
-      flex-direction: column;
-      -ms-overflow-style: none; 
-      scrollbar-width: none;  
-      overflow-y: auto; 
+
+  .digits-display {
+      height: 40px;
+  }
+  
+  .digits, .digits.zero {
+      height: 40px;
+      width: 20px;
+      background-size: cover;
+  }
+  
+  .smiley {
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+  }
+  }
+  @media screen and (max-height:570px) {
+  
+  .digits-display {
+      height: 40px;
+  }
+  
+  .digits, .digits.zero {
+      height: 40px;
+      width: 20px;
+      background-size: cover;
+  }
+  
+  .smiley {
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+  }
+  
+  }
+
+  @media screen and (max-width: 455px) {
+    .innerAbout{
+      max-width: 100vw;
+
+      overflow-y: scroll;
       overflow: scroll;
       text-align: center;
-}
-}
+      display: flex;
+      flex-direction: column;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    
+    }
+    
+      .inner-border{
+          border-width: 1.5px;   
+          border-style: solid;
+          border-top-color: #7B7B7B;
+          border-left-color: #7B7B7B;
+          border-bottom-color: white;
+          border-right-color: white;   
+      }
+      .outer-border{
+        border-width: 1.5px;
+        border-style: solid;
+        border-top-color: white;
+        border-left-color: white;
+        border-bottom-color: #7B7B7B;
+        border-right-color: #7B7B7B;
+      }
+      .digits-display {
+          height: 40px;
+      }
+    
+      .digits, .digits.zero {
+          height: 40px;
+          width: 20px;
+          background-size: cover;
+      }
+    
+      .smiley {
+          width: 40px;
+          height: 40px;
+          background-size: cover;
+      }
+    }
+    @media screen and (max-width: 1000px) and (max-height: 1000px) {
+  
+      .tile{
+        width: 5vw;
+        height: 5vw;
+        max-width: 25px;
+        max-height: 25px;
+      }
+    }

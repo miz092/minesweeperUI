@@ -262,7 +262,7 @@ const Tile = ({
       }, 300);
 
       vibrationTimerRef.current = setTimeout(() => {
-        let shouldVibrate = tileToVibrate.includes(field);
+        let shouldVibrate = tileToVibrate.includes(lowercaseName);
         if ("vibrate" in navigator && shouldVibrate) {
           navigator.vibrate(50);
         }
@@ -304,7 +304,7 @@ const Tile = ({
         col: coordinates.x,
         rightClick: e.button === 2,
       };
-      clickSound.play();
+
       updateState(interaction);
     }
   };

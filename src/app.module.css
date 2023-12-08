@@ -136,10 +136,11 @@ body{
     border-left-color: white;
     border-bottom-color: #808080;
     border-right-color: #808080; 
-    width: auto;
+
+    height: max-content;
     overflow-y: hidden;
-    max-width: 50dvw; 
-    max-height: 96vh;
+    max-width: max-content ; 
+    max-height: 95%;
     height: max-content;
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
@@ -176,10 +177,11 @@ body{
     background-size: cover;
 }
 
-@media screen and (max-height:690px) {
+@media screen and (max-height:700px) {
 .app{
     height: 120dvh;
 }
+
 
 }
 
@@ -217,7 +219,7 @@ body{
     width: auto;
    
     max-width: 85dvw; /* Maximum width */
-    max-height: 95dvh; /* Maximum height */
+    max-height: 95vh; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
 
@@ -234,10 +236,16 @@ body{
     border-right-color: #808080; 
     width: auto;
    
-    max-width: 85dvw; /* Maximum width */
-    max-height: 95dvh; /* Maximum height */
+    max-width: max-content; /* Maximum width */
+    max-height: 100%; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
 
 }
 }
+
+@media screen and (max-width: 790px) and (max-height: 960px) {
+  
+.app{
+    height: 120dvh;}
+  }

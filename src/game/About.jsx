@@ -17,7 +17,7 @@ function AboutPage() {
       />
 
       <h1 style={{ textAlign: "center" }}>Justice Minesweeper</h1>
-      <div className={styles["about"]}>
+      <div className={styles["innerAbout"]}>
         <p>Experience a new level of challenge with Justice MineSweeper!</p>
         <p>
           Unlike traditional Minesweeper games, where luck plays a role, this
