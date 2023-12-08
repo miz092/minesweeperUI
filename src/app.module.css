@@ -138,8 +138,9 @@ body{
     border-right-color: #808080; 
     width: auto;
     overflow-y: hidden;
-    max-width: 95dvw; 
-    max-height: max-content;
+    max-width: 50dvw; 
+    max-height: 96vh;
+    height: max-content;
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
 

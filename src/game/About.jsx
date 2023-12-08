@@ -12,7 +12,7 @@ function AboutPage() {
     <div className="about">
       <img
         src={minesweeperIcon}
-        style={{ width: "75px", margin: "auto", display: "block" }}
+        style={{ width: "65px", margin: "auto", display: "block" }}
         alt="Game"
       />
 
@@ -30,7 +30,7 @@ function AboutPage() {
         <p
           style={{
             textAlign: "center",
-            fontSize: "1.8rem",
+            fontSize: "1.5rem",
             fontWeight: "bold",
           }}
         >
@@ -99,8 +99,8 @@ function AboutPage() {
             </div>
           </li>
         </div>
+        <p style={{ display: "block" }}>ALL RIGHTS RESERVED SZÖVEG JÖHET IDE</p>
       </div>
-      <p>ALL RIGHTS RESERVED SZÖVEG JÖHET IDE</p>
     </div>
   );
 }

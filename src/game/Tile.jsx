@@ -218,34 +218,6 @@ const fieldData = [
     },
   },
 ];
-const fieldTypeToClassName = {
-  FREE_0: "revealed_empty",
-  FREE_1: "revealed_one",
-  FREE_2: "revealed_two",
-  FREE_3: "revealed_three",
-  FREE_4: "revealed_four",
-  FREE_5: "revealed_five",
-  FREE_6: "revealed_six",
-  FREE_7: "revealed_seven",
-  FREE_8: "revealed_eight",
-  MARKED_MINE: "flagged",
-  COVERED: "covered",
-  TRUE_MINE: "revealed_mine",
-  COVERED_FREE_0: "covered_empty",
-  COVERED_FREE_1: "covered_one",
-  COVERED_FREE_2: "covered_two",
-  COVERED_FREE_3: "covered_three",
-  COVERED_FREE_4: "covered_four",
-  COVERED_FREE_5: "covered_five",
-  COVERED_FREE_6: "covered_six",
-  COVERED_FREE_7: "covered_seven",
-  COVERED_FREE_8: "covered_eight",
-  COVERED_MULTI_FREE: "covered_multi-free",
-  COVERED_MINE: "covered_mine",
-  PHANTOM_MINE: "phantom_mine",
-  WRONGLY_MARKED_MINE: "wrongly_marked_mine",
-  NOT_NECESSARILY_MINE: "not_necessarily_mine",
-};
 
 const tileToVibrate = ["covered", "flagged"];
 
@@ -261,10 +233,8 @@ const Tile = ({
   const tileRef = useRef(null);
   const updateTimerRef = useRef(null);
   const vibrationTimerRef = useRef(null);
-  // const [isLongPress, setIsLongPress] = useState(false);
+
   const longPressRef = useRef(false);
-  const field = fieldTypeToClassName[fieldType];
-  // const description = fieldTypeToDescription[fieldType];
 
   const fieldDataEntry = fieldData.find((f) => f.name === fieldType);
 
@@ -334,7 +304,7 @@ const Tile = ({
         col: coordinates.x,
         rightClick: e.button === 2,
       };
-
+      clickSound.play();
       updateState(interaction);
     }
   };
@@ -352,7 +322,7 @@ const Tile = ({
   const className = lowercaseName
     ? `${styles.tile} ${styles[lowercaseName]}`
     : styles.tile;
-  // const className = field ? `${styles.tile} ${styles[field]}` : styles.tile;
+
   return hasDescription ? (
     <Tooltip
       followCursor

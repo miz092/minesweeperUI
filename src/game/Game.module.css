@@ -372,14 +372,21 @@ margin: auto
 
 .imageContainer {
   padding: 3px;
-  border-color: rgba(0, 0, 0, 0.302);
+  /* border-color: rgba(0, 0, 0, 0.302); */
   background-color:#dfdcdc;
+  border-width: 3px;
   border-radius: 1px;
   border-style: solid;
   
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+
+  border-top-color: white;
+  border-left-color: white;
+  border-bottom-color: #808080;
+  border-right-color: #808080; 
 }
 .imageContainer:not(:first-child) {
   border-top: 1px solid rgba(0, 0, 0, 0.302);
