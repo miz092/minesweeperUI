@@ -60,7 +60,7 @@ function Result({ gameMessage }) {
       <h1
         style={{
           textAlign: "center",
-          fontSize: "2em",
+
           margin: "0.5em 0",
         }}
       >

@@ -26,6 +26,19 @@ function Game({
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
   const [markedCount, setMarkedCount] = useState(estate?.markedCount);
   const [isLoading, setIsLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+
+  useEffect(() => {
+    let timeout;
+    if (isLoading) {
+      timeout = setTimeout(() => setShowLoading(true), 400);
+    } else {
+      clearTimeout(timeout);
+      setShowLoading(false);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isLoading]);
 
   const timer = () => {
     let interval = null;
@@ -48,6 +61,16 @@ function Game({
     resetGame();
   }, [restartGame]);
 
+  useEffect(() => {
+    start();
+
+    setGameFinished(false);
+    setTimerStarted(-1);
+    setTimeToDisplay(0);
+    setRestartGame(false);
+    setGameEnded("MSG_CONTINUE");
+  }, []);
+
   const resetGame = () => {
     if (restartGame) {
       setTimeToDisplay(0);
@@ -65,8 +88,6 @@ function Game({
 
   const letsUpdateGameState = async (interaction) => {
     if (gameFinished || isLoading) {
-      console.log("disallowed click");
-      console.log("loading", isLoading);
       return;
     }
     if (timerStarted < 0 && !gameFinished) {
@@ -99,7 +120,7 @@ function Game({
 
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
-      <Loading isLoading={isLoading} />
+      <Loading isLoading={showLoading} />
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley

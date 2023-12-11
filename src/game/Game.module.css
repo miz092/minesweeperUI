@@ -241,17 +241,14 @@ background-size: cover;
 
 
 
-.scrollbar::-webkit-scrollbar {
-  display: none;
-}
+
 
 .scrollbar {
 
   font-size: 20px;
   margin: 0.5em 0;
   max-height: 60dvh;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+
   overflow-y: auto; /* Keep vertical scrolling */
 }
 
@@ -259,27 +256,28 @@ background-size: cover;
 
   font-size: 20px;  
 margin: 0.5em 0;
-
+overscroll-behavior: contain;
   box-sizing: border-box ;
   display: flex;
   flex-direction: column;
-  -ms-overflow-style: none; 
+
   scrollbar-width: none;  
   overflow-y: scroll; 
   overflow: scroll;
   text-align: center;
 }
 .innerAbout {
+  overscroll-behavior: contain;
   font-size: 20px;  
   margin: 0.5em 0;
-  max-width: 65dvw;
+  max-width: 60dvw;
   max-height: 75dvh; 
   overflow-y: auto; 
   text-align: center;
   display: flex;
   flex-direction: column;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* -ms-overflow-style: none; */
+
 }
 .innerAbout > * {
   flex-shrink: 0;
@@ -291,19 +289,17 @@ margin: 0.5em 0;
 
 }
 
-.innerAbout::-webkit-scrollbar {
-  display: none; ;
-}
 
-.loadingCursor {
-  cursor: wait;
-}
+
+
 .result{
 box-sizing: border-box;
 max-width: 65dvw;
 min-width: 20dvw;
 padding: 10px;
-margin: auto
+margin: auto;
+overscroll-behavior: contain;
+
 }
 
 .imageContainer {
@@ -317,13 +313,14 @@ margin: auto
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+text-align: left;
 
   border-top-color: white;
   border-left-color: white;
   border-bottom-color: #808080;
   border-right-color: #808080; 
 }
+
 .imageContainer:not(:first-child) {
   border-top: 1px solid rgba(0, 0, 0, 0.302);
 }
@@ -429,6 +426,7 @@ margin: auto
           height: 40px;
           background-size: cover;
       }
+  
     }
     @media screen and (max-width: 1000px) and (max-height: 1000px) {
   

@@ -9,7 +9,12 @@ const Loading = ({ isLoading }) => {
 
   return (
     <div className={styles.overlay}>
-      <img src={Hourglass} alt="Loading..." className={styles.loading} />
+      <img
+        style={{ width: "200px", height: "200px" }}
+        src={Hourglass}
+        alt="Loading..."
+        className={isLoading ? "loading-visible" : "loading"}
+      />
     </div>
   );
 };

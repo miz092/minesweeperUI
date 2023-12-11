@@ -78,6 +78,7 @@ body{
     justify-content: center;
     align-items: center;
     z-index: 101;
+    
 }
 .modal {
     z-index: 101;
@@ -90,7 +91,7 @@ body{
     border-bottom-color: #808080;
     border-right-color: #808080; 
     width: auto;
-   
+    overscroll-behavior: contain;
     max-width: 50dvw; /* Maximum width */
     max-height: 95dvh; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
@@ -144,7 +145,7 @@ body{
     height: max-content;
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
-
+    overscroll-behavior: contain;
 
       
 }
@@ -200,10 +201,13 @@ body{
   .loading {
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
-    width:200px;   
-    height: 200px;  
+
+    width:100px;   
+    height: auto;  
   }
   .loading-visible {
+
+ 
     opacity: 1;
   }
 
@@ -220,7 +224,7 @@ body{
     border-bottom-color: #808080;
     border-right-color: #808080; 
     width: auto;
-   
+   overscroll-behavior: contain;
     max-width: 85dvw; /* Maximum width */
     max-height: 95vh; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
@@ -238,7 +242,7 @@ body{
     border-bottom-color: #808080;
     border-right-color: #808080; 
     width: auto;
-   
+   overscroll-behavior: contain;
     max-width: max-content; /* Maximum width */
     max-height: 100%; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
@@ -266,6 +270,9 @@ body{
         justify-content: space-between;
         align-items: center;
     
+        font-size: 20px;
+    }
+    .modal h1{
         font-size: 20px;
     }
   }
