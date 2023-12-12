@@ -44,7 +44,7 @@
   max-width: 25px;
   max-height: 25px;
   display: inline-block;
-  cursor: pointer;
+  user-select: none;
   background-size: cover;
   image-rendering: pixelated;
 }
@@ -270,7 +270,7 @@ overscroll-behavior: contain;
   overscroll-behavior: contain;
   font-size: 20px;  
   margin: 0.5em 0;
-  max-width: 60dvw;
+  max-width: 50dvw;
   max-height: 75dvh; 
   overflow-y: auto; 
   text-align: center;

@@ -22,6 +22,7 @@ function Root() {
   useEffect(() => {
     orientationRef.current =
       window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+    startNewGame();
   }, []);
 
   const handleGameEnd = (message) => {
@@ -29,29 +30,29 @@ function Root() {
     setGameMessage(message);
     setIsModalOpen(true);
   };
-  useEffect(() => {
-    start();
-  }, []);
+
   const closeModal = () => {
     if (
       gameMessage === "MSG_CONGRATULATIONS" ||
       gameMessage === "MSG_THAT_WAS_TOO_EASY"
     ) {
-      setRestartGame(true);
+      startNewGame();
     }
     setIsModalOpen(false);
-
     setGameMessage("");
   };
 
-  async function start() {
+  async function startNewGame() {
     try {
       const response = await startGame(orientationRef.current);
       setGameState(response);
+      setGameFinished(false);
+      setRestartGame(false);
     } catch (error) {
       console.error("Error fetching game state:", error);
     }
   }
+
   const gameMessageTitles = {
     MSG_CONGRATULATIONS: "Nice job! You won!",
     MSG_STEPPED_ON_MINE: "Oops! You stepped on a mine!",
@@ -70,7 +71,7 @@ function Root() {
                   <Game
                     estate={gameState.engineState}
                     board={gameState.board}
-                    start={start}
+                    start={startNewGame}
                     onGameEnd={handleGameEnd}
                     setRestartGame={setRestartGame}
                     restartGame={restartGame}

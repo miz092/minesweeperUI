@@ -15,6 +15,7 @@ const Tile = ({
   updateState,
   gameEnded,
   isLoading,
+  isMouseDownGlobal,
 }) => {
   const tileRef = useRef(null);
   const updateTimerRef = useRef(null);
@@ -22,7 +23,7 @@ const Tile = ({
 
   const longPressRef = useRef(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
-
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const fieldDataEntry = fieldData.find((f) => f.name === fieldType);
 
   const { lowercaseName, description, hasDescription } = fieldDataEntry.data;
@@ -83,7 +84,7 @@ const Tile = ({
   }, [updateState, coordinates, lowercaseName]);
 
   const handleClick = (e) => {
-    if (isLoading) return;
+    if (isLoading || e.button !== 0) return;
 
     if (!longPressRef.current) {
       const interaction = {
@@ -94,11 +95,11 @@ const Tile = ({
 
       updateState(interaction);
     }
-    setIsMouseDown(false);
   };
 
   const handleRightClick = (e) => {
     e.preventDefault();
+    console.log("right click");
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,
@@ -107,9 +108,10 @@ const Tile = ({
     updateState(interaction);
   };
 
-  const className = isMouseDown
-    ? `${styles.tile} ${styles["revealed_empty"]}` // Add pressed tile class
-    : `${styles.tile} ${styles[lowercaseName]}`;
+  const className =
+    isMouseDownGlobal && isMouseOver
+      ? `${styles.tile} ${styles["revealed_empty"]}`
+      : `${styles.tile} ${styles[lowercaseName]}`;
 
   const handleMouseDown = (e) => {
     if (!isLoading) {
@@ -119,8 +121,10 @@ const Tile = ({
   };
 
   const handleMouseUp = (e) => {
-    setIsMouseDown(false);
     onMouseUp(e);
+    if (e.button === 0) {
+      handleClick(e);
+    }
   };
   return hasDescription ? (
     <Tooltip
@@ -143,8 +147,11 @@ const Tile = ({
         className={className}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        onMouseLeave={() => setIsMouseDown(false)}
-        onClick={handleClick}
+        onMouseOver={() => setIsMouseOver(true)}
+        onMouseLeave={() => {
+          setIsMouseOver(false);
+        }}
+        // onClick={handleMouseUp}
         onContextMenu={handleRightClick}
       />
     </Tooltip>
@@ -153,9 +160,12 @@ const Tile = ({
       ref={tileRef}
       className={className}
       onMouseDown={handleMouseDown}
+      onMouseOver={() => setIsMouseOver(true)}
       onMouseUp={handleMouseUp}
-      onMouseLeave={() => setIsMouseDown(false)}
-      onClick={handleClick}
+      onMouseLeave={() => {
+        setIsMouseOver(false);
+      }}
+      // onClick={handleMouseUp}
       onContextMenu={handleRightClick}
     />
   );

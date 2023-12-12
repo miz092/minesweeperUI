@@ -20,9 +20,6 @@ export async function startGame(orientation) {
         )
     });
   
-
-
-
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }

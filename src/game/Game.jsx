@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styles from "./Game.module.css";
 import Tile from "./Tile";
 import DigitsDisplay from "./DigitsDisplay";
@@ -26,50 +26,54 @@ function Game({
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
   const [markedCount, setMarkedCount] = useState(estate?.markedCount);
   const [isLoading, setIsLoading] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
+  const [firstInteraction, setFirstInteraction] = useState(false);
+  const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
+  const handleGlobalMouseDown = (e) => {
+    if (e.button === 0) {
+      // Check if left mouse button is pressed
+      setIsMouseDownGlobal(true);
+    }
+  };
 
+  const handleGlobalMouseUp = (e) => {
+    if (e.button === 0) {
+      setIsMouseDownGlobal(false);
+    }
+  };
   useEffect(() => {
-    let timeout;
-    if (isLoading) {
-      timeout = setTimeout(() => setShowLoading(true), 400);
-    } else {
-      clearTimeout(timeout);
-      setShowLoading(false);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [isLoading]);
-
-  const timer = () => {
-    let interval = null;
-
-    if (timerStarted >= 0) {
-      interval = setInterval(() => {
-        setTimeToDisplay((prevTime) => prevTime + 1);
-      }, 1000);
-    }
+    window.addEventListener("mousedown", handleGlobalMouseDown);
+    window.addEventListener("mouseup", handleGlobalMouseUp);
 
     return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
+      window.removeEventListener("mousedown", handleGlobalMouseDown);
+      window.removeEventListener("mouseup", handleGlobalMouseUp);
     };
-  };
-  useEffect(timer, [timerStarted]);
-
-  useEffect(() => {
-    resetGame();
-  }, [restartGame]);
-
-  useEffect(() => {
-    start();
-
-    setGameFinished(false);
-    setTimerStarted(-1);
-    setTimeToDisplay(0);
-    setRestartGame(false);
-    setGameEnded("MSG_CONTINUE");
   }, []);
+  useEffect(() => {
+    setGameProperties(estate, board);
+  }, [estate, board]);
+
+  useEffect(() => {
+    const timerId = timerStarted >= 0 ? setInterval(updateTime, 1000) : null;
+    return () => clearInterval(timerId);
+  }, [timerStarted]);
+
+  const setGameProperties = useCallback((estate, board) => {
+    setCurrentboard(board);
+    setCurrentEstate(estate);
+    setRemainingMines(estate?.mineCount);
+    setMarkedCount(estate?.markedCount);
+  }, []);
+
+  const updateTime = () => {
+    setTimeToDisplay((prevTime) => prevTime + 1);
+  };
+
+  useEffect(() => {
+    if (restartGame) {
+      resetGame();
+    }
+  }, [restartGame]);
 
   const resetGame = () => {
     if (restartGame) {
@@ -83,6 +87,7 @@ function Game({
       setRemainingMines(estate?.mineCount);
       setMarkedCount(estate?.markedCount);
       setGameEnded("MSG_CONTINUE");
+      setFirstInteraction(false);
     }
   };
 
@@ -90,16 +95,26 @@ function Game({
     if (gameFinished || isLoading) {
       return;
     }
-    if (timerStarted < 0 && !gameFinished) {
+    if (!firstInteraction) {
       setTimerStarted(Date.now());
+      setFirstInteraction(true);
     }
-    setIsLoading(true);
-    let gameState = { board: currentBoard, engineState: currentEstate };
+
+    let loadingTimeout;
 
     try {
+      // Set a timeout to change isLoading state after 300ms
+      loadingTimeout = setTimeout(() => {
+        setIsLoading(true);
+      }, 300);
+
+      let gameState = { board: currentBoard, engineState: currentEstate };
       let newState = await updateGameState(gameState, interaction);
 
       if (newState) {
+        clearTimeout(loadingTimeout); // Clear the timeout if response is received
+        setIsLoading(false); // Hide loading indicator immediately if response is received before 300ms
+
         setRemainingMines(newState?.remainingMines);
         setCurrentboard(newState.state.board);
         setCurrentEstate(newState?.state.engineState);
@@ -107,12 +122,11 @@ function Game({
         if (newState?.msg !== "MSG_CONTINUE") {
           setGameEnded(newState?.msg);
           onGameEnd(newState?.msg);
-
           setTimerStarted(-1);
         }
-        setIsLoading(false);
       }
     } catch (error) {
+      clearTimeout(loadingTimeout); // Clear the timeout in case of an error
       setIsLoading(false);
       console.error("Error updating game state:", error);
     }
@@ -120,7 +134,7 @@ function Game({
 
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
-      <Loading isLoading={showLoading} />
+      <Loading isLoading={isLoading} />
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
@@ -152,6 +166,7 @@ function Game({
                 key={`${y}-${x}`}
                 updateState={letsUpdateGameState}
                 isLoading={isLoading}
+                isMouseDownGlobal={isMouseDownGlobal}
               />
             ))}
           </div>
