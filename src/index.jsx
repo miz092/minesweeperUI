@@ -36,8 +36,10 @@ function Root() {
       gameMessage === "MSG_CONGRATULATIONS" ||
       gameMessage === "MSG_THAT_WAS_TOO_EASY"
     ) {
+      setGameEnded("MSG_CONTINUE");
       startNewGame();
     }
+
     setIsModalOpen(false);
     setGameMessage("");
   };

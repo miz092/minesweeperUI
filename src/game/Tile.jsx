@@ -94,6 +94,8 @@ const Tile = ({
       };
 
       updateState(interaction);
+      setIsMouseDown(false);
+      setIsMouseOver(false);
     }
   };
 
@@ -122,6 +124,7 @@ const Tile = ({
 
   const handleMouseUp = (e) => {
     onMouseUp(e);
+
     if (e.button === 0) {
       handleClick(e);
     }
@@ -150,6 +153,7 @@ const Tile = ({
         onMouseOver={() => setIsMouseOver(true)}
         onMouseLeave={() => {
           setIsMouseOver(false);
+          setIsMouseDown(false);
         }}
         // onClick={handleMouseUp}
         onContextMenu={handleRightClick}
@@ -159,11 +163,14 @@ const Tile = ({
     <div
       ref={tileRef}
       className={className}
-      onMouseDown={handleMouseDown}
+      onMouseDown={() => {
+        handleMouseDown;
+      }}
       onMouseOver={() => setIsMouseOver(true)}
       onMouseUp={handleMouseUp}
       onMouseLeave={() => {
         setIsMouseOver(false);
+        setIsMouseDown(false);
       }}
       // onClick={handleMouseUp}
       onContextMenu={handleRightClick}
