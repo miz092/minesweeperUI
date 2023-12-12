@@ -253,10 +253,16 @@ body{
 
 @media screen and (max-width: 790px) and (max-height: 960px) {
   .modal .close-modal-button{
-    width: 39px;
-    height: 35px;
+    width: 32px;
+    height: 29px;
   
   }
+.window .close-window-button{
+    width: 32px;
+    height: 29px;
+  
+    
+}
 .app{
     height: 120dvh;}
 
