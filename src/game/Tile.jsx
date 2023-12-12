@@ -67,6 +67,7 @@ const Tile = ({
 
       if (!longPressRef.current) {
         handleClick(e);
+        console.log("touch");
       }
     };
 
@@ -84,18 +85,21 @@ const Tile = ({
   }, [updateState, coordinates, lowercaseName]);
 
   const handleClick = (e) => {
-    if (isLoading || e.button !== 0) return;
+    if (isLoading) return;
+    const isTouchEvent = e.type === "touchend";
 
-    if (!longPressRef.current) {
-      const interaction = {
-        row: coordinates.y,
-        col: coordinates.x,
-        rightClick: e.button === 2,
-      };
+    if (isTouchEvent || e.button === 0) {
+      if (!longPressRef.current) {
+        const interaction = {
+          row: coordinates.y,
+          col: coordinates.x,
+          rightClick: e.button === 2,
+        };
 
-      updateState(interaction);
-      setIsMouseDown(false);
-      setIsMouseOver(false);
+        updateState(interaction);
+        setIsMouseDown(false);
+        setIsMouseOver(false);
+      }
     }
   };
 
