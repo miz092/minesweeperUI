@@ -29,6 +29,10 @@ function Game({
   const [firstInteraction, setFirstInteraction] = useState(false);
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
 
+  useEffect(() => {
+    start();
+  }, []);
+
   const handleGlobalMouseDown = (e) => {
     if (e.button === 0) {
       setIsMouseDownGlobal(true);
@@ -49,30 +53,18 @@ function Game({
       window.removeEventListener("mouseup", handleGlobalMouseUp);
     };
   }, []);
-  useEffect(() => {
-    setGameProperties(estate, board);
-  }, [estate, board]);
 
   useEffect(() => {
     const timerId = timerStarted >= 0 ? setInterval(updateTime, 1000) : null;
     return () => clearInterval(timerId);
   }, [timerStarted]);
 
-  const setGameProperties = useCallback((estate, board) => {
-    setCurrentboard(board);
-    setCurrentEstate(estate);
-    setRemainingMines(estate?.mineCount);
-    setMarkedCount(estate?.markedCount);
-  }, []);
-
   const updateTime = () => {
     setTimeToDisplay((prevTime) => prevTime + 1);
   };
 
   useEffect(() => {
-    if (restartGame) {
-      resetGame();
-    }
+    resetGame();
   }, [restartGame]);
 
   const resetGame = () => {

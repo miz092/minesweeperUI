@@ -22,6 +22,7 @@ function Root() {
   useEffect(() => {
     orientationRef.current =
       window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+
     startNewGame();
   }, []);
 
@@ -36,8 +37,7 @@ function Root() {
       gameMessage === "MSG_CONGRATULATIONS" ||
       gameMessage === "MSG_THAT_WAS_TOO_EASY"
     ) {
-      setGameEnded("MSG_CONTINUE");
-      startNewGame();
+      setRestartGame(true);
     }
 
     setIsModalOpen(false);
@@ -47,9 +47,11 @@ function Root() {
   async function startNewGame() {
     try {
       const response = await startGame(orientationRef.current);
+
       setGameState(response);
       setGameFinished(false);
-      setRestartGame(false);
+
+      setGameEnded("MSG_CONTINUE");
     } catch (error) {
       console.error("Error fetching game state:", error);
     }
