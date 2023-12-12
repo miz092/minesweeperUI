@@ -67,7 +67,6 @@ const Tile = ({
 
       if (!longPressRef.current) {
         handleClick(e);
-        console.log("touch");
       }
     };
 
@@ -105,7 +104,7 @@ const Tile = ({
 
   const handleRightClick = (e) => {
     e.preventDefault();
-    console.log("right click");
+
     const interaction = {
       row: coordinates.y,
       col: coordinates.x,

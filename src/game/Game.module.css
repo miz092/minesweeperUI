@@ -248,7 +248,7 @@ background-size: cover;
   font-size: 20px;
   margin: 0.5em 0;
   max-height: 60dvh;
-
+text-align: center;
   overflow-y: auto; /* Keep vertical scrolling */
 }
 

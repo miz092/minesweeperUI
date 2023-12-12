@@ -28,9 +28,9 @@ function Game({
   const [isLoading, setIsLoading] = useState(false);
   const [firstInteraction, setFirstInteraction] = useState(false);
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
+
   const handleGlobalMouseDown = (e) => {
     if (e.button === 0) {
-      // Check if left mouse button is pressed
       setIsMouseDownGlobal(true);
     }
   };
@@ -103,7 +103,6 @@ function Game({
     let loadingTimeout;
 
     try {
-      // Set a timeout to change isLoading state after 300ms
       loadingTimeout = setTimeout(() => {
         setIsLoading(true);
       }, 300);
@@ -112,8 +111,8 @@ function Game({
       let newState = await updateGameState(gameState, interaction);
 
       if (newState) {
-        clearTimeout(loadingTimeout); // Clear the timeout if response is received
-        setIsLoading(false); // Hide loading indicator immediately if response is received before 300ms
+        clearTimeout(loadingTimeout);
+        setIsLoading(false);
 
         setRemainingMines(newState?.remainingMines);
         setCurrentboard(newState.state.board);
@@ -126,7 +125,7 @@ function Game({
         }
       }
     } catch (error) {
-      clearTimeout(loadingTimeout); // Clear the timeout in case of an error
+      clearTimeout(loadingTimeout);
       setIsLoading(false);
       console.error("Error updating game state:", error);
     }
