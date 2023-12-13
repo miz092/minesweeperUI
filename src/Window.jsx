@@ -1,20 +1,24 @@
 import { Link } from "react-router-dom";
 import styles from "./app.module.css";
-import React from "react";
+import Draggable from "react-draggable";
 
 function Window(props) {
+  const handleClose = (e) => {
+    e.stopPropagation();
+  };
   return (
-    <>
-      <div className={`${styles["window"]}`}>
+    <Draggable handle={`.${styles.title}`}>
+      <div className={styles["window"]}>
         <div className={styles["title"]}>
           {props.title}
-          <Link to="/">
+
+          <Link to="/" onClick={handleClose} onTouchStartCapture={handleClose}>
             <div className={styles["close-window-button"]} />
           </Link>
         </div>
         {props.children}
       </div>
-    </>
+    </Draggable>
   );
 }
 

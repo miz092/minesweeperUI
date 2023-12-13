@@ -37,9 +37,21 @@
 .row {
   display: flex;
 }
+@keyframes tileAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 .tile {
-  width: 3dvw; /* Adjusted for typo '3dvw' */
+  animation: tileAppear 0.2s ease forwards;
+
+  width: 3dvw; 
   height: 3dvw;
   max-width: 25px;
   max-height: 25px;
@@ -47,8 +59,14 @@
   user-select: none;
   background-size: cover;
   image-rendering: pixelated;
+  transition: transform 0.3s ease;
+
 }
 
+
+.tile:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
 .tile.revealed_empty {
 background-image: url('../sprites/tile_empty.png');   
 } 
