@@ -86,13 +86,13 @@ const Tile = ({
       tileElement.addEventListener("mouseleave", handleMouseLeave);
       tileElement.removeEventListener("touchstart", handleTouchStart);
       tileElement.removeEventListener("touchend", handleTouchEnd);
-      // setIsMouseOver(false);
     };
   }, [updateState, coordinates, lowercaseName]);
 
   useEffect(() => {
     setIsMouseOver(false);
   }, [lowercaseName]);
+
   const handleClick = (e) => {
     if (isLoading) return;
     const isTouchEvent = e.type === "touchend";
