@@ -154,6 +154,7 @@ function Game({
                 gameEnded={gameEnded}
                 onMouseDown={(e) => e.button === 0 && setMouseDownOnTile(true)}
                 onMouseUp={(e) => e.button === 0 && setMouseDownOnTile(false)}
+                onMouseLeave={() => setMouseDownOnTile(false)}
                 key={`${y}-${x}`}
                 updateState={letsUpdateGameState}
                 isLoading={isLoading}

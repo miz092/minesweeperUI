@@ -9,7 +9,6 @@ import Game from "./game/Game.jsx";
 import AboutPage from "./game/About.jsx";
 import Result from "./game/Result.jsx";
 import { startGame } from "./app/api.js";
-
 function Root() {
   const [gameState, setGameState] = useState(null);
   const [gameFinished, setGameFinished] = useState(false);
