@@ -54,7 +54,12 @@ const Tile = ({
         }
       }, 500);
     };
-
+    const handleMouseEnter = () => {
+      setIsMouseOver(true);
+    };
+    const handleMouseLeave = () => {
+      setIsMouseOver(false);
+    };
     const handleTouchEnd = (e) => {
       if (updateTimerRef.current) {
         clearTimeout(updateTimerRef.current);
@@ -67,7 +72,8 @@ const Tile = ({
         handleClick(e);
       }
     };
-
+    tileElement.addEventListener("mouseenter", handleMouseEnter);
+    tileElement.addEventListener("mouseleave", handleMouseLeave);
     tileElement.addEventListener("touchstart", handleTouchStart, {
       passive: false,
     });
@@ -76,17 +82,17 @@ const Tile = ({
     });
 
     return () => {
+      tileElement.addEventListener("mouseenter", handleMouseEnter);
+      tileElement.addEventListener("mouseleave", handleMouseLeave);
       tileElement.removeEventListener("touchstart", handleTouchStart);
       tileElement.removeEventListener("touchend", handleTouchEnd);
-      setIsMouseOver(false);
+      // setIsMouseOver(false);
     };
   }, [updateState, coordinates, lowercaseName]);
-  const handleMouseEnter = () => {
-    setIsMouseOver(true);
-  };
-  const handleMouseLeave = () => {
+
+  useEffect(() => {
     setIsMouseOver(false);
-  };
+  }, [lowercaseName]);
   const handleClick = (e) => {
     if (isLoading) return;
     const isTouchEvent = e.type === "touchend";
@@ -101,6 +107,7 @@ const Tile = ({
         updateState(interaction);
       }
     }
+    setIsMouseOver(false);
   };
 
   const handleRightClick = (e) => {
@@ -112,6 +119,7 @@ const Tile = ({
       rightClick: true,
     };
     updateState(interaction);
+    setIsMouseOver(false);
   };
 
   const className =
@@ -153,8 +161,6 @@ const Tile = ({
       <div
         ref={tileRef}
         className={className}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onContextMenu={handleRightClick}
@@ -164,8 +170,6 @@ const Tile = ({
     <div
       ref={tileRef}
       className={className}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onContextMenu={handleRightClick}
