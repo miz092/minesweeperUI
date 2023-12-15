@@ -1,8 +1,9 @@
 import styles from "./app.module.css";
 import React from "react";
 import { useEffect } from "react";
+import Draggable from "react-draggable";
 
-function Modal({ title, onClose, message, children }) {
+function Modal({ title, onClose, children }) {
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.key === "Escape") {
@@ -16,19 +17,29 @@ function Modal({ title, onClose, message, children }) {
       window.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
+  const handleClose = (e) => {
+    e.stopPropagation();
+    onClose();
+  };
 
   return (
+    // <Draggable handle={`.${styles.title}`}>
     <div className={`${styles["modal-overlay"]}`}>
       <div className={`${styles["modal"]}`}>
-        <div className={styles["title"]}>
+        <div className={`${styles["modalTitle"]}`}>
           {title}
-          <div to="/" onClick={() => onClose()}>
+          <div
+            onClick={(e) => {
+              handleClose(e);
+            }}
+          >
             <div className={styles["close-modal-button"]} />
           </div>
         </div>
         {children}
       </div>
     </div>
+    // </Draggable>
   );
 }
 

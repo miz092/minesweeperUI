@@ -4,7 +4,11 @@ import myComputerIcon from "./sprites/my_computer_icon.png";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./app.module.css";
 
-function App() {
+function App({ setShowAbout }) {
+  const handleAboutClick = () => {
+    setShowAbout(true);
+  };
+
   return (
     <>
       <div className={styles["app"]}>
@@ -15,30 +19,34 @@ function App() {
                 src={minesweeperIcon}
                 alt="Game"
                 className={styles["program-icon"]}
-              ></img>
+              />
               <p className={styles["program-name"]}>Minesweeper</p>
             </div>
           </Link>
-          <Link to="https://segmenthee.com/">
+          <a
+            href="https://segmenthee.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div className={styles["program"]}>
               <img
                 src={segmentheeIcon}
-                alt="Game"
+                alt="Segmenthee"
                 className={styles["program-icon"]}
-              ></img>
+              />
               <p className={styles["program-name"]}>Segmenthee</p>
             </div>
-          </Link>
-          <Link to="/about">
-            <div className={styles["program"]}>
-              <img
-                src={myComputerIcon}
-                alt="Game"
-                className={styles["program-icon"]}
-              ></img>
-              <p className={styles["program-name"]}>About the game</p>
-            </div>
-          </Link>
+          </a>
+          {/* <Link to="/minesweeper/about"> */}
+          <div onClick={handleAboutClick} className={styles["program"]}>
+            <img
+              src={myComputerIcon}
+              alt="About the Game"
+              className={styles["program-icon"]}
+            />
+            <p className={styles["program-name"]}>About the Game</p>
+          </div>
+          {/* </Link> */}
         </div>
         <Outlet />
       </div>

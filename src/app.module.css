@@ -94,7 +94,7 @@ body{
 .modal {
     animation: appear 0.5s ease forwards;
 
-    z-index: 101;
+    z-index: 103;
     padding: 3px;
     background-color: #BFBFBF;
     border-width: 3px;
@@ -106,13 +106,14 @@ body{
 
     overscroll-behavior: contain;
     max-width: 50dvw; 
-    max-height: 95dvh;
+    max-height: max-content;
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
 
 }
 
-.modal .title {
+.modal .modalTitle {
+    z-index: 103;
     padding: 4px 3px;
     background: linear-gradient(to left, #1085D2, #00007B);
     margin-bottom: 3px;
@@ -124,7 +125,7 @@ body{
     font-size: 18px;
 }
 
-.modal>*:not(.title) {
+.modal>*:not(.modalTitle) {
     padding: 3px 20px;
 }
 
@@ -191,7 +192,7 @@ body{
     height: 27px;
     background-image: url('./sprites/close_button.png');
     background-size: cover;
-}
+    }
 
 @media screen and (max-height:700px) {
 .app{
@@ -210,7 +211,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; 
+    z-index: 100; 
   }
   
   .loading {
@@ -241,7 +242,7 @@ body{
     width: auto;
    overscroll-behavior: contain;
     max-width: 85dvw; /* Maximum width */
-    max-height: 95vh; /* Maximum height */
+    max-height: max-content; /* Maximum height */
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
 
@@ -282,7 +283,7 @@ body{
     height: 120dvh;}
 
 
-.modal .title {
+.modal .modalTitle {
         padding: 4px 3px;
         background: linear-gradient(to left, #1085D2, #00007B);
         margin-bottom: 3px;
@@ -295,5 +296,28 @@ body{
     }
     .modal h1{
         font-size: 20px;
+    }
+  }
+
+
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+   
+  }
+  button {
+    font-size: 20px;
+    padding: 7px 20px;
+    background: #BFBFBF;
+    border: 2px outset;
+    outline: none;
+    cursor: pointer;
+    color: black;
+    margin: 3px;
+
+    &:active {
+      border: 2px inset;
     }
   }

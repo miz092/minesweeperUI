@@ -1,7 +1,9 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, useRef } from "react";
 import Loading from "./Loading.jsx";
+import Button from "./Button.jsx";
+import loadingGif from "./images/dialup.webp";
 import App from "./App.jsx";
 import Window from "./Window.jsx";
 import Modal from "./Modal.jsx";
@@ -16,6 +18,8 @@ function Root() {
   const [restartGame, setRestartGame] = useState(false);
   const [gameEnded, setGameEnded] = useState("MSG_CONTINUE");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const orientationRef = useRef(null);
   useEffect(() => {
@@ -42,11 +46,14 @@ function Root() {
     setIsModalOpen(false);
     setGameMessage("");
   };
+  const closeLoadingModal = () => {
+    setIsModalOpen(false);
+  };
 
   async function startNewGame() {
     try {
       const response = await startGame(orientationRef.current);
-
+      setGameMessage("MSG_CONTINUE");
       setGameState(response);
       setGameFinished(false);
 
@@ -65,43 +72,48 @@ function Root() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<App />}>
-          <Route
-            path="/minesweeper"
-            element={
-              gameState ? (
-                <Window title="Minesweeper">
-                  <Game
-                    estate={gameState.engineState}
-                    board={gameState.board}
-                    start={startNewGame}
-                    onGameEnd={handleGameEnd}
-                    setRestartGame={setRestartGame}
-                    restartGame={restartGame}
-                    gameEnded={gameEnded}
-                    setGameEnded={setGameEnded}
-                    gameFinished={gameFinished}
-                    setGameFinished={setGameFinished}
-                  />
-                </Window>
-              ) : (
-                <Loading isLoading={true} />
-              )
-            }
-          />
-          <Route
-            path="about"
-            element={
-              <Window title="About">
-                <AboutPage></AboutPage>
-              </Window>
-            }
-          />
+        <Route path="/" element={<App setShowAbout={setShowAbout} />}>
+          <Route path="minesweeper" element={<Outlet />}>
+            <Route
+              index
+              element={
+                gameState ? (
+                  <Window title="Minesweeper">
+                    <Game
+                      estate={gameState.engineState}
+                      board={gameState.board}
+                      start={startNewGame}
+                      onGameEnd={handleGameEnd}
+                      setRestartGame={setRestartGame}
+                      restartGame={restartGame}
+                      gameEnded={gameEnded}
+                      setGameEnded={setGameEnded}
+                      gameFinished={gameFinished}
+                      setGameFinished={setGameFinished}
+                      isLoading={isLoading}
+                      setIsLoading={setIsLoading}
+                    />
+                  </Window>
+                ) : (
+                  <Loading isLoading={true} />
+                  // <Modal title="Loading" onClose={closeLoadingModal}>
+                  //   <div>
+                  //     <img style={{ width: "100%" }} src={loadingGif}></img>
+                  //     <div className="buttons">
+                  //       <Button text={"Wait"}></Button>
+                  //       <Button text={"Restart"}></Button>
+                  //     </div>
+                  //   </div>
+                  // </Modal>
+                )
+              }
+            />
+          </Route>
           <Route
             path="result"
             element={
               <Window title="Result">
-                <Result></Result>
+                <Result />
               </Window>
             }
           />
@@ -110,6 +122,11 @@ function Root() {
       {isModalOpen && (
         <Modal title={gameMessageTitles[gameMessage]} onClose={closeModal}>
           <Result gameMessage={gameMessage} />
+        </Modal>
+      )}
+      {showAbout && (
+        <Modal title="About Minesweeper" onClose={() => setShowAbout(false)}>
+          <AboutPage />
         </Modal>
       )}
     </Router>

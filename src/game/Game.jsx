@@ -5,7 +5,9 @@ import DigitsDisplay from "./DigitsDisplay";
 import Smiley from "./Smiley";
 import { updateGameState } from "../app/api.js";
 import Loading from "../Loading.jsx";
-
+import loadingGif from "../images/dialup.webp";
+import Modal from "../Modal.jsx";
+import Button from "../Button.jsx";
 function Game({
   estate,
   board,
@@ -17,6 +19,8 @@ function Game({
   setGameEnded,
   gameFinished,
   setGameFinished,
+  isLoading,
+  setIsLoading,
 }) {
   const [mouseDownOnTile, setMouseDownOnTile] = useState(false);
   const [timerStarted, setTimerStarted] = useState(-1);
@@ -25,15 +29,18 @@ function Game({
   const [currentEstate, setCurrentEstate] = useState(estate);
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
   const [markedCount, setMarkedCount] = useState(estate?.markedCount);
-  const [isLoading, setIsLoading] = useState(false);
+
   const [firstInteraction, setFirstInteraction] = useState(false);
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const abortControllerRef = useRef(new AbortController());
 
   useEffect(() => {
     start();
   }, []);
-
+  const closeLoadingModal = () => {
+    setIsModalOpen(false);
+  };
   const handleGlobalMouseDown = (e) => {
     if (e.button === 0) {
       setIsMouseDownGlobal(true);
@@ -98,7 +105,7 @@ function Game({
       setTimerStarted(Date.now());
       setFirstInteraction(true);
     }
-
+    setIsModalOpen(true);
     let loadingTimeout;
 
     try {
@@ -140,6 +147,20 @@ function Game({
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
       <Loading isLoading={isLoading} />
+      {/* {isLoading && isModalOpen ? (
+        <Modal title="Loading" onClose={closeLoadingModal}>
+          <div>
+            <img style={{ width: "100%" }} src={loadingGif}></img>
+            <div className="buttons">
+              <Button text={"Wait"}></Button>
+              <Button
+                text={"Restart"}
+                onMouseUp={() => setRestartGame(true)}
+              ></Button>
+            </div>
+          </div>
+        </Modal>
+      ) : null} */}
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
