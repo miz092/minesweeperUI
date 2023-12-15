@@ -137,6 +137,7 @@ const Tile = ({
   const handleMouseUp = (e) => {
     onMouseUp(e);
     setIsMouseDown(false);
+
     if (e.button === 0) {
       handleClick(e);
     }

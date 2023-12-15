@@ -103,10 +103,10 @@ body{
     border-left-color: white;
     border-bottom-color: #808080;
     border-right-color: #808080; 
-    width: auto;
+
     overscroll-behavior: contain;
-    max-width: 50dvw; /* Maximum width */
-    max-height: 95dvh; /* Maximum height */
+    max-width: 50dvw; 
+    max-height: 95dvh;
     box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
     box-sizing: border-box;
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./Game.module.css";
 import Tile from "./Tile";
 import DigitsDisplay from "./DigitsDisplay";
@@ -28,6 +28,7 @@ function Game({
   const [isLoading, setIsLoading] = useState(false);
   const [firstInteraction, setFirstInteraction] = useState(false);
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
+  const abortControllerRef = useRef(new AbortController());
 
   useEffect(() => {
     start();
@@ -55,9 +56,12 @@ function Game({
   }, []);
 
   useEffect(() => {
-    const timerId = timerStarted >= 0 ? setInterval(updateTime, 1000) : null;
+    let timerId;
+    if (timerStarted >= 0 && !isLoading) {
+      timerId = setInterval(updateTime, 1000);
+    }
     return () => clearInterval(timerId);
-  }, [timerStarted]);
+  }, [timerStarted, isLoading]);
 
   const updateTime = () => {
     setTimeToDisplay((prevTime) => prevTime + 1);
@@ -69,6 +73,7 @@ function Game({
 
   const resetGame = () => {
     if (restartGame) {
+      abortControllerRef.current.abort();
       setTimeToDisplay(0);
       setTimerStarted(-1);
       setRestartGame(false);
@@ -80,6 +85,8 @@ function Game({
       setMarkedCount(estate?.markedCount);
       setGameEnded("MSG_CONTINUE");
       setFirstInteraction(false);
+      setIsLoading(false);
+      abortControllerRef.current = new AbortController();
     }
   };
 
@@ -100,7 +107,11 @@ function Game({
       }, 300);
 
       let gameState = { board: currentBoard, engineState: currentEstate };
-      let newState = await updateGameState(gameState, interaction);
+      let newState = await updateGameState(
+        gameState,
+        interaction,
+        abortControllerRef.current.signal
+      );
 
       if (newState) {
         clearTimeout(loadingTimeout);
@@ -120,6 +131,9 @@ function Game({
       clearTimeout(loadingTimeout);
       setIsLoading(false);
       console.error("Error updating game state:", error);
+      if (error.name !== "AbortError") {
+        console.error("Error updating game state:", error);
+      }
     }
   };
 

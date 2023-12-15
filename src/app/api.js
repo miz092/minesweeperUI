@@ -31,7 +31,7 @@ export async function startGame(orientation) {
 }
 }
 
-export async function updateGameState(gameState, interaction) {
+export async function updateGameState(gameState, interaction, signal) {
 
 
 
@@ -45,7 +45,8 @@ export async function updateGameState(gameState, interaction) {
             credentials: 'include',
             body: JSON.stringify(    {
               gameState: gameState,
-              interaction: interaction})
+              interaction: interaction}),
+              signal: signal 
         });
 
         if (!response.ok) {
