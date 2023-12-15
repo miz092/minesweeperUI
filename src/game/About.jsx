@@ -8,7 +8,6 @@ import phantomMine from "../images/phantommine.png";
 import styles from "./Game.module.css";
 
 function AboutPage() {
-  console.log("about opened");
   return (
     <div className="about">
       <img

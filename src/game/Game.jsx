@@ -147,20 +147,6 @@ function Game({
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
       <Loading isLoading={isLoading} />
-      {/* {isLoading && isModalOpen ? (
-        <Modal title="Loading" onClose={closeLoadingModal}>
-          <div>
-            <img style={{ width: "100%" }} src={loadingGif}></img>
-            <div className="buttons">
-              <Button text={"Wait"}></Button>
-              <Button
-                text={"Restart"}
-                onMouseUp={() => setRestartGame(true)}
-              ></Button>
-            </div>
-          </div>
-        </Modal>
-      ) : null} */}
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley

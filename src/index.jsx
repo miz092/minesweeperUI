@@ -20,6 +20,20 @@ function Root() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isExtendedLoading, setIsExtendedLoading] = useState(false);
+
+  useEffect(() => {
+    let timeoutId;
+    if (isLoading) {
+      timeoutId = setTimeout(() => {
+        setIsExtendedLoading(true);
+      }, 3000);
+    } else {
+      setIsExtendedLoading(false);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [isLoading]);
 
   const orientationRef = useRef(null);
   useEffect(() => {
@@ -46,8 +60,9 @@ function Root() {
     setIsModalOpen(false);
     setGameMessage("");
   };
+
   const closeLoadingModal = () => {
-    setIsModalOpen(false);
+    setIsExtendedLoading(false);
   };
 
   async function startNewGame() {
@@ -62,7 +77,10 @@ function Root() {
       console.error("Error fetching game state:", error);
     }
   }
-
+  const handleRestartGame = () => {
+    setRestartGame(true);
+    setIsExtendedLoading(false);
+  };
   const gameMessageTitles = {
     MSG_CONGRATULATIONS: "Nice job! You won!",
     MSG_STEPPED_ON_MINE: "Oops! You stepped on a mine!",
@@ -96,15 +114,6 @@ function Root() {
                   </Window>
                 ) : (
                   <Loading isLoading={true} />
-                  // <Modal title="Loading" onClose={closeLoadingModal}>
-                  //   <div>
-                  //     <img style={{ width: "100%" }} src={loadingGif}></img>
-                  //     <div className="buttons">
-                  //       <Button text={"Wait"}></Button>
-                  //       <Button text={"Restart"}></Button>
-                  //     </div>
-                  //   </div>
-                  // </Modal>
                 )
               }
             />
@@ -127,6 +136,23 @@ function Root() {
       {showAbout && (
         <Modal title="About Minesweeper" onClose={() => setShowAbout(false)}>
           <AboutPage />
+        </Modal>
+      )}
+      {isExtendedLoading && (
+        <Modal title="Waiting for response" onClose={closeLoadingModal}>
+          <div>
+            <img style={{ width: "100%" }} src={loadingGif}></img>
+            <div className="buttons">
+              <Button
+                onClick={() => closeLoadingModal()}
+                text={"Wait"}
+              ></Button>
+              <Button
+                onClick={() => handleRestartGame()}
+                text={"Restart"}
+              ></Button>
+            </div>
+          </div>
         </Modal>
       )}
     </Router>

@@ -95,6 +95,7 @@ const Tile = ({
 
   const handleClick = (e) => {
     if (isLoading) return;
+
     const isTouchEvent = e.type === "touchend";
     if (isTouchEvent || e.button === 0) {
       if (!longPressRef.current) {
