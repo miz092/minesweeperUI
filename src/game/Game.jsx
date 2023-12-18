@@ -29,6 +29,7 @@ function Game({
   const [currentEstate, setCurrentEstate] = useState(estate);
   const [remainingMines, setRemainingMines] = useState(estate?.mineCount);
   const [markedCount, setMarkedCount] = useState(estate?.markedCount);
+  const [isDelayedLoading, setIsDelayedLoading] = useState(false);
 
   const [firstInteraction, setFirstInteraction] = useState(false);
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
@@ -100,7 +101,6 @@ function Game({
       return;
     }
     setIsLoading(true);
-    console.log("lets update game state called");
     if (!firstInteraction) {
       setTimerStarted(Date.now());
       setFirstInteraction(true);
@@ -109,9 +109,9 @@ function Game({
     let loadingTimeout;
 
     try {
-      // loadingTimeout = setTimeout(() => {
-      //   setIsLoading(true);
-      // }, 300);
+      loadingTimeout = setTimeout(() => {
+        setIsDelayedLoading(true);
+      }, 300);
 
       let gameState = { board: currentBoard, engineState: currentEstate };
       let newState = await updateGameState(
@@ -123,7 +123,7 @@ function Game({
       if (newState) {
         clearTimeout(loadingTimeout);
         setIsLoading(false);
-
+        setIsDelayedLoading(false);
         setRemainingMines(newState?.remainingMines);
         setCurrentboard(newState.state.board);
         setCurrentEstate(newState?.state.engineState);
@@ -137,6 +137,7 @@ function Game({
     } catch (error) {
       clearTimeout(loadingTimeout);
       setIsLoading(false);
+      setIsDelayedLoading(false);
       console.error("Error updating game state:", error);
       if (error.name !== "AbortError") {
         console.error("Error updating game state:", error);
@@ -146,7 +147,7 @@ function Game({
 
   return (
     <div className={`${styles["game"]} ${styles["outer-border"]}`}>
-      <Loading isLoading={isLoading} />
+      <Loading isLoading={isDelayedLoading} />
       <div className={`${styles["game-status"]} ${styles["inner-border"]}`}>
         <DigitsDisplay digits={3} value={remainingMines - markedCount} />
         <Smiley
