@@ -32,13 +32,13 @@ const Tile = ({
     const handleTouchStart = (e) => {
       if (isLoading) return;
       longPressRef.current = false;
-
       if (e.cancelable) {
         e.preventDefault();
       }
 
       updateTimerRef.current = setTimeout(() => {
         longPressRef.current = true;
+
         const interaction = {
           row: coordinates.y,
           col: coordinates.x,
@@ -61,11 +61,14 @@ const Tile = ({
       setIsMouseOver(false);
     };
     const handleTouchEnd = (e) => {
+      if (isLoading) return;
       if (updateTimerRef.current) {
         clearTimeout(updateTimerRef.current);
+        updateTimerRef.current = null;
       }
       if (vibrationTimerRef.current) {
         clearTimeout(vibrationTimerRef.current);
+        vibrationTimerRef.current = null;
       }
 
       if (!longPressRef.current) {

@@ -66,12 +66,13 @@ function Root() {
   };
 
   async function startNewGame() {
+    setIsLoading(true);
     try {
       const response = await startGame(orientationRef.current);
       setGameMessage("MSG_CONTINUE");
       setGameState(response);
       setGameFinished(false);
-
+      setIsLoading(false);
       setGameEnded("MSG_CONTINUE");
     } catch (error) {
       console.error("Error fetching game state:", error);

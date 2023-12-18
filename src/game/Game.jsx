@@ -39,7 +39,11 @@ function Game({
   useEffect(() => {
     start();
   }, []);
-
+  const handleGlobalMouseLeave = () => {
+    if (isMouseDownGlobal) {
+      setMouseDownOnTile(false);
+    }
+  };
   const handleGlobalMouseDown = (e) => {
     if (e.button === 0) {
       setIsMouseDownGlobal(true);
@@ -54,12 +58,14 @@ function Game({
   useEffect(() => {
     window.addEventListener("mousedown", handleGlobalMouseDown);
     window.addEventListener("mouseup", handleGlobalMouseUp);
+    window.addEventListener("mouseleave", handleGlobalMouseLeave);
 
     return () => {
       window.removeEventListener("mousedown", handleGlobalMouseDown);
       window.removeEventListener("mouseup", handleGlobalMouseUp);
+      window.removeEventListener("mouseleave", handleGlobalMouseLeave);
     };
-  }, []);
+  }, [isMouseDownGlobal]);
 
   useEffect(() => {
     let timerId;
@@ -80,6 +86,7 @@ function Game({
   const resetGame = () => {
     if (restartGame) {
       abortControllerRef.current.abort();
+      setGameEnded("MSG_CONTINUE");
       setTimeToDisplay(0);
       setTimerStarted(-1);
       setRestartGame(false);
@@ -89,7 +96,6 @@ function Game({
       setCurrentEstate(estate);
       setRemainingMines(estate?.mineCount);
       setMarkedCount(estate?.markedCount);
-      setGameEnded("MSG_CONTINUE");
       setFirstInteraction(false);
       setIsLoading(false);
       abortControllerRef.current = new AbortController();
@@ -158,7 +164,7 @@ function Game({
               : gameEnded === "MSG_STEPPED_ON_MINE" ||
                 gameEnded === "MSG_ILLEGAL_GUESS"
               ? "lose"
-              : mouseDownOnTile
+              : isMouseDownGlobal && mouseDownOnTile
               ? "scared"
               : "normal"
           }

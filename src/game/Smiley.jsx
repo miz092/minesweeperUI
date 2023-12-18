@@ -10,7 +10,7 @@ function Smiley(props) {
   };
   const className = `${styles["smiley"]} ${stateToClassName[props.state]}`;
 
-  return <div className={className} onClick={props.onReset} />;
+  return <div className={className} onMouseDownCapture={props.onReset} />;
 }
 
 export default Smiley;
