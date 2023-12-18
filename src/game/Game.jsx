@@ -38,9 +38,7 @@ function Game({
   useEffect(() => {
     start();
   }, []);
-  const closeLoadingModal = () => {
-    setIsModalOpen(false);
-  };
+
   const handleGlobalMouseDown = (e) => {
     if (e.button === 0) {
       setIsMouseDownGlobal(true);
@@ -101,6 +99,8 @@ function Game({
     if (gameFinished || isLoading) {
       return;
     }
+    setIsLoading(true);
+    console.log("lets update game state called");
     if (!firstInteraction) {
       setTimerStarted(Date.now());
       setFirstInteraction(true);
@@ -109,9 +109,9 @@ function Game({
     let loadingTimeout;
 
     try {
-      loadingTimeout = setTimeout(() => {
-        setIsLoading(true);
-      }, 300);
+      // loadingTimeout = setTimeout(() => {
+      //   setIsLoading(true);
+      // }, 300);
 
       let gameState = { board: currentBoard, engineState: currentEstate };
       let newState = await updateGameState(
