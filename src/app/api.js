@@ -6,7 +6,7 @@ let officeString = "http://192.168.1.204:8080"
 let onlineString = "https://justice-sweeper.onrender.com"
 export async function startGame(orientation) {
   try {
-    const response = await fetch(`${onlineString}/play/start`, {
+    const response = await fetch(`${viseString}/play/start`, {
 
         method: 'POST',
         headers: {
@@ -36,7 +36,7 @@ export async function updateGameState(gameState, interaction, signal) {
 
 
   try {
-    const response = await fetch(`${onlineString}/play/interact`, {
+    const response = await fetch(`${viseString}/play/interact`, {
         
             method: 'POST',
             headers: {
