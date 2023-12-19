@@ -30,7 +30,7 @@ function App({ setShowAbout }) {
                 alt="Game"
                 className={styles["program-icon"]}
               />
-              <p className={styles["program-name"]}>Minesweeper</p>
+              <p className={styles["program-name"]}>Justice Minesweeper</p>
             </div>
           </Link>
           <a
