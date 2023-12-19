@@ -22,11 +22,13 @@ function App({ setShowAbout }) {
         <div className={styles["programs"]}>
           <Link
             to="/minesweeper"
-            onClick={ReactGA.event({
-              category: "click",
-              action: "Clicked on play game",
-              label: "minesweeper",
-            })}
+            onClick={() =>
+              ReactGA.event({
+                category: "click",
+                action: "Clicked on play game",
+                label: "minesweeper",
+              })
+            }
           >
             <div className={styles["program"]}>
               <img
@@ -41,11 +43,13 @@ function App({ setShowAbout }) {
             href="https://segmenthee.com/"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={ReactGA.event({
-              category: "click",
-              action: "Clicked on segmenthee",
-              label: "segmenthee",
-            })}
+            onClick={() =>
+              ReactGA.event({
+                category: "click",
+                action: "Clicked on segmenthee",
+                label: "segmenthee",
+              })
+            }
           >
             <div className={styles["program"]}>
               <img
