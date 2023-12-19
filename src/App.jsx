@@ -23,7 +23,11 @@ function App({ setShowAbout }) {
           <Link
             to="/minesweeper"
             onClick={() => {
-              gaEventTracker("click", "game started"), console.log("tracker");
+              ReactGA.event({
+                category: "Button Click",
+                action: "Clicked on play game",
+                label: "minesweeper",
+              });
             }}
           >
             <div className={styles["program"]}>
@@ -39,7 +43,13 @@ function App({ setShowAbout }) {
             href="https://segmenthee.com/"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => gaEventTracker("external nav", "segmenthee website")}
+            onClick={() =>
+              ReactGA.event({
+                category: "Button Click",
+                action: "Clicked on segmenthee",
+                label: "minesweeper",
+              })
+            }
           >
             <div className={styles["program"]}>
               <img
