@@ -22,7 +22,9 @@ function App({ setShowAbout }) {
         <div className={styles["programs"]}>
           <Link
             to="/minesweeper"
-            onClick={() => gaEventTracker("click", "game started")}
+            onClick={() => {
+              gaEventTracker("click", "game started"), console.log("tracker");
+            }}
           >
             <div className={styles["program"]}>
               <img
