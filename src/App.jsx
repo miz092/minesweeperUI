@@ -6,8 +6,8 @@ import styles from "./app.module.css";
 import UseAnalyticsEventTracker from "./UseAnalyticsEventTracker";
 
 import ReactGA from "react-ga";
-
-const TRACKING_ID = "G-RSMM8752NE";
+const TRACKING_ID = "G-1EJYGXJ5D3";
+// const TRACKING_ID = "G-RSMM8752NE";
 ReactGA.initialize(TRACKING_ID);
 
 function App({ setShowAbout }) {
