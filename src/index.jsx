@@ -7,12 +7,10 @@ import {
 } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
 
 import Loading from "./Loading.jsx";
 import ReactGA from "react-ga";
-import Button from "./Button.jsx";
-import loadingGif from "./images/dialup.webp";
+
 import App from "./App.jsx";
 import Window from "./Window.jsx";
 import Modal from "./Modal.jsx";
@@ -95,10 +93,7 @@ function Root() {
     MSG_ILLEGAL_GUESS: "Illegal guess!",
     MSG_THAT_WAS_TOO_EASY: "That was too easy! Try again!",
   };
-  const location = useLocation();
-  useEffect(() => {
-    ReactGA.pageview(location.pathname + location.search);
-  }, [location]);
+
   return (
     <Router>
       <Routes>
