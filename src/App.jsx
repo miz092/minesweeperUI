@@ -24,7 +24,7 @@ function App({ setShowAbout }) {
             to="/minesweeper"
             onClick={() => {
               ReactGA.event({
-                category: "Button Click",
+                category: "click",
                 action: "Clicked on play game",
                 label: "minesweeper",
               });
@@ -45,7 +45,7 @@ function App({ setShowAbout }) {
             rel="noopener noreferrer"
             onClick={() =>
               ReactGA.event({
-                category: "Button Click",
+                category: "click",
                 action: "Clicked on segmenthee",
                 label: "minesweeper",
               })
