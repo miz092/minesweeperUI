@@ -6,8 +6,8 @@ import styles from "./app.module.css";
 import UseAnalyticsEventTracker from "./UseAnalyticsEventTracker";
 
 import ReactGA from "react-ga";
-const TRACKING_ID = "G-1EJYGXJ5D3";
-// const TRACKING_ID = "G-RSMM8752NE";
+// const TRACKING_ID = "G-1EJYGXJ5D3";
+const TRACKING_ID = "G-RSMM8752NE";
 ReactGA.initialize(TRACKING_ID);
 
 function App({ setShowAbout }) {
@@ -22,13 +22,11 @@ function App({ setShowAbout }) {
         <div className={styles["programs"]}>
           <Link
             to="/minesweeper"
-            onClick={() => {
-              ReactGA.event({
-                category: "click",
-                action: "Clicked on play game",
-                label: "minesweeper",
-              });
-            }}
+            onClick={ReactGA.event({
+              category: "click",
+              action: "Clicked on play game",
+              label: "minesweeper",
+            })}
           >
             <div className={styles["program"]}>
               <img
@@ -43,13 +41,11 @@ function App({ setShowAbout }) {
             href="https://segmenthee.com/"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() =>
-              ReactGA.event({
-                category: "click",
-                action: "Clicked on segmenthee",
-                label: "segmenthee",
-              })
-            }
+            onClick={ReactGA.event({
+              category: "click",
+              action: "Clicked on segmenthee",
+              label: "segmenthee",
+            })}
           >
             <div className={styles["program"]}>
               <img
