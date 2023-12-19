@@ -9,12 +9,15 @@ const Loading = ({ isLoading }) => {
 
   return (
     <div className={styles.overlay}>
-      <img
-        style={{ width: "200px", height: "200px" }}
-        src={Hourglass}
-        alt="Loading..."
-        className={isLoading ? "loading-visible" : "loading"}
-      />
+      <div className={styles.loadingInnerBorder}>
+        {" "}
+        <img
+          style={{ width: "200px", height: "200px" }}
+          src={Hourglass}
+          alt="Loading..."
+          className={isLoading ? "loading-visible" : "loading"}
+        />
+      </div>
     </div>
   );
 };

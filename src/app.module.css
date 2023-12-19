@@ -225,6 +225,21 @@ body{
     width:100px;   
     height: auto;  
   }
+  .loadingInnerBorder {
+    background-color: #BFBFBF;
+    border-width: 3px;
+    border-style: solid;
+    border-top-color: white;
+    border-left-color: white;
+    border-bottom-color: #808080;
+    border-right-color: #808080; 
+
+    max-width: 50dvw; 
+    max-height: max-content;
+    box-shadow: -1px -1px 0 1px #BFBFBF, 0px 0px 0 2px black;
+    box-sizing: border-box;
+  }
+ 
   .loading-visible {
 
     opacity: 1;

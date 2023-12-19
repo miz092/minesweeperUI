@@ -23,7 +23,7 @@ function Modal({ title, onClose, children }) {
   };
 
   return (
-    // <Draggable handle={`.${styles.title}`}>
+    // <Draggable handle={`.${styles.modalTitle}`}>
     <div className={`${styles["modal-overlay"]}`}>
       <div className={`${styles["modal"]}`}>
         <div className={`${styles["modalTitle"]}`}>

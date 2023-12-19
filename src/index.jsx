@@ -1,7 +1,10 @@
 import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+
 import Loading from "./Loading.jsx";
+import ReactGA from "react-ga";
 import Button from "./Button.jsx";
 import loadingGif from "./images/dialup.webp";
 import App from "./App.jsx";
@@ -22,6 +25,8 @@ function Root() {
   const [isLoading, setIsLoading] = useState(false);
   const [isExtendedLoading, setIsExtendedLoading] = useState(false);
 
+  const TRACKING_ID = "G-RSMM8752NE";
+  ReactGA.initialize(TRACKING_ID);
   useEffect(() => {
     let timeoutId;
     if (isLoading) {
@@ -61,10 +66,6 @@ function Root() {
     setGameMessage("");
   };
 
-  const closeLoadingModal = () => {
-    setIsExtendedLoading(false);
-  };
-
   async function startNewGame() {
     setIsLoading(true);
     try {
@@ -88,6 +89,9 @@ function Root() {
     MSG_ILLEGAL_GUESS: "Illegal guess!",
     MSG_THAT_WAS_TOO_EASY: "That was too easy! Try again!",
   };
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <Router>
       <Routes>
@@ -97,7 +101,7 @@ function Root() {
               index
               element={
                 gameState ? (
-                  <Window title="Minesweeper">
+                  <Window title="Justice Minesweeper">
                     <Game
                       estate={gameState.engineState}
                       board={gameState.board}
@@ -111,6 +115,7 @@ function Root() {
                       setGameFinished={setGameFinished}
                       isLoading={isLoading}
                       setIsLoading={setIsLoading}
+                      setIsExtendedLoading={setIsExtendedLoading}
                     />
                   </Window>
                 ) : (
@@ -139,23 +144,23 @@ function Root() {
           <AboutPage />
         </Modal>
       )}
-      {isExtendedLoading && (
+      {/* {isExtendedLoading && (
         <Modal title="Waiting for response" onClose={closeLoadingModal}>
           <div>
             <img style={{ width: "100%" }} src={loadingGif}></img>
+            <p>
+              The server takes a bit longer than usual to respond. Please wait.
+            </p>
             <div className="buttons">
-              <Button
-                onClick={() => closeLoadingModal()}
-                text={"Wait"}
-              ></Button>
+              <Button onClick={() => closeLoadingModal()} text={"Ok"}></Button>
               <Button
                 onClick={() => handleRestartGame()}
-                text={"Restart"}
+                text={"Refresh"}
               ></Button>
             </div>
           </div>
         </Modal>
-      )}
+      )} */}
     </Router>
   );
 }

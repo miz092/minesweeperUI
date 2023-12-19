@@ -21,6 +21,7 @@ function Game({
   setGameFinished,
   isLoading,
   setIsLoading,
+  setIsExtendedLoading,
 }) {
   const [mouseDownOnTile, setMouseDownOnTile] = useState(false);
   const [timerStarted, setTimerStarted] = useState(-1);
@@ -128,6 +129,7 @@ function Game({
 
       if (newState) {
         clearTimeout(loadingTimeout);
+        setIsExtendedLoading(false);
         setIsLoading(false);
         setIsDelayedLoading(false);
         setRemainingMines(newState?.remainingMines);

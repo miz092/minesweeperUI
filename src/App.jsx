@@ -3,17 +3,27 @@ import segmentheeIcon from "./sprites/segmenthee_icon.png";
 import myComputerIcon from "./sprites/my_computer_icon.png";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./app.module.css";
+import UseAnalyticsEventTracker from "./UseAnalyticsEventTracker";
+
+import ReactGA from "react-ga";
+
+const TRACKING_ID = "G-RSMM8752NE";
+ReactGA.initialize(TRACKING_ID);
 
 function App({ setShowAbout }) {
   const handleAboutClick = () => {
     setShowAbout(true);
   };
+  const gaEventTracker = UseAnalyticsEventTracker("Minesweeper");
 
   return (
     <>
       <div className={styles["app"]}>
         <div className={styles["programs"]}>
-          <Link to="/minesweeper">
+          <Link
+            to="/minesweeper"
+            onClick={() => gaEventTracker("click", "game started")}
+          >
             <div className={styles["program"]}>
               <img
                 src={minesweeperIcon}
@@ -27,6 +37,7 @@ function App({ setShowAbout }) {
             href="https://segmenthee.com/"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => gaEventTracker("external nav", "segmenthee website")}
           >
             <div className={styles["program"]}>
               <img
