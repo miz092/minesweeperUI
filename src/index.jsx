@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLocation } from "react";
 import ReactDOM from "react-dom";
 
 import Loading from "./Loading.jsx";
@@ -89,9 +89,10 @@ function Root() {
     MSG_ILLEGAL_GUESS: "Illegal guess!",
     MSG_THAT_WAS_TOO_EASY: "That was too easy! Try again!",
   };
+  const location = useLocation();
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
   return (
     <Router>
       <Routes>
