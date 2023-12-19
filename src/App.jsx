@@ -47,7 +47,7 @@ function App({ setShowAbout }) {
               ReactGA.event({
                 category: "click",
                 action: "Clicked on segmenthee",
-                label: "minesweeper",
+                label: "segmenthee",
               })
             }
           >
