@@ -22,8 +22,8 @@ function Root() {
   const [showAbout, setShowAbout] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isExtendedLoading, setIsExtendedLoading] = useState(false);
-  const TRACKING_ID = "G-1EJYGXJ5D3";
-  // const TRACKING_ID = "G-RSMM8752NE";
+  // const TRACKING_ID = "G-1EJYGXJ5D3";
+  const TRACKING_ID = "G-RSMM8752NE";
   ReactGA.initialize(TRACKING_ID);
   useEffect(() => {
     let timeoutId;
