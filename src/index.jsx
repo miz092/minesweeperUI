@@ -1,10 +1,4 @@
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-  useLocation,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, useRef } from "react";
 
