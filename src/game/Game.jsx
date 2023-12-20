@@ -38,7 +38,7 @@ function Game({
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const abortControllerRef = useRef(new AbortController());
-  const TRACKING_ID = "G-RSMM8752NE";
+  const TRACKING_ID = "G-1EJYGXJ5D3";
   // const TRACKING_ID = "G-RSMM8752NE";
   useEffect(() => {
     ReactGA.initialize(TRACKING_ID);
