@@ -6,8 +6,8 @@ import styles from "./app.module.css";
 import UseAnalyticsEventTracker from "./UseAnalyticsEventTracker";
 
 import ReactGA from "react-ga";
-// const TRACKING_ID = "G-1EJYGXJ5D3";
-const TRACKING_ID = "G-RSMM8752NE";
+const TRACKING_ID = "G-1EJYGXJ5D3";
+// const TRACKING_ID = "G-RSMM8752NE";
 ReactGA.initialize(TRACKING_ID);
 
 function App({ setShowAbout }) {
@@ -24,8 +24,8 @@ function App({ setShowAbout }) {
             to="/minesweeper"
             onClick={() =>
               ReactGA.event({
-                category: "click",
-                action: "Clicked on play game",
+                category: "play_click",
+                action: "clicked_on_play_game",
                 label: "minesweeper",
               })
             }
@@ -45,8 +45,8 @@ function App({ setShowAbout }) {
             rel="noopener noreferrer"
             onClick={() =>
               ReactGA.event({
-                category: "click",
-                action: "Clicked on segmenthee",
+                category: "segmenthee_click",
+                action: "clicked_on_segmenthee",
                 label: "segmenthee",
               })
             }
