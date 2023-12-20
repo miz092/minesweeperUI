@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import React, { useState, useEffect, useRef } from "react";
 
 import Loading from "./Loading.jsx";
-import ReactGA from "react-ga";
 
 import App from "./App.jsx";
 import Window from "./Window.jsx";
@@ -12,7 +11,14 @@ import Game from "./game/Game.jsx";
 import AboutPage from "./game/About.jsx";
 import Result from "./game/Result.jsx";
 import { startGame } from "./app/api.js";
+import ReactGA from "react-ga";
+const TRACKING_ID = "G-RSMM8752NE";
+// const TRACKING_ID = "G-RSMM8752NE";
+
 function Root() {
+  useEffect(() => {
+    ReactGA.initialize(TRACKING_ID);
+  }, []);
   const [gameState, setGameState] = useState(null);
   const [gameFinished, setGameFinished] = useState(false);
   const [gameMessage, setGameMessage] = useState("");
@@ -22,7 +28,9 @@ function Root() {
   const [showAbout, setShowAbout] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isExtendedLoading, setIsExtendedLoading] = useState(false);
-
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   useEffect(() => {
     let timeoutId;
     if (isLoading) {

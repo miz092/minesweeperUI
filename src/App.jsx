@@ -5,14 +5,19 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import styles from "./app.module.css";
 import { useEffect } from "react";
 import ReactGA from "react-ga";
-const TRACKING_ID = "G-1EJYGXJ5D3";
+const TRACKING_ID = "G-RSMM8752NE";
 // const TRACKING_ID = "G-RSMM8752NE";
-ReactGA.initialize(TRACKING_ID);
 
 function App({ setShowAbout }) {
+  useEffect(() => {
+    ReactGA.initialize(TRACKING_ID);
+  }, []);
   let location = useLocation();
   useEffect(() => {
-    ReactGA.pageview(location.pathname);
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname,
+    });
   }, [location]);
   const handleAboutClick = () => {
     setShowAbout(true);

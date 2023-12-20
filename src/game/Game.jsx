@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./Game.module.css";
 import Tile from "./Tile";
@@ -9,6 +9,7 @@ import Loading from "../Loading.jsx";
 import loadingGif from "../images/dialup.webp";
 import Modal from "../Modal.jsx";
 import Button from "../Button.jsx";
+import ReactGA from "react-ga";
 function Game({
   estate,
   board,
@@ -37,9 +38,21 @@ function Game({
   const [isMouseDownGlobal, setIsMouseDownGlobal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const abortControllerRef = useRef(new AbortController());
-
+  const TRACKING_ID = "G-RSMM8752NE";
+  // const TRACKING_ID = "G-RSMM8752NE";
+  useEffect(() => {
+    ReactGA.initialize(TRACKING_ID);
+  }, []);
   useEffect(() => {
     start();
+    ReactGA.event({
+      category: "game_start",
+      action: "game_started",
+      label: "minesweeper",
+    });
+  }, []);
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + "_game_started");
   }, []);
   const handleGlobalMouseLeave = () => {
     if (isMouseDownGlobal) {
@@ -83,6 +96,11 @@ function Game({
 
   useEffect(() => {
     resetGame();
+    ReactGA.event({
+      category: "game_restart",
+      action: "game_restarted",
+      label: "minesweeper",
+    });
   }, [restartGame]);
 
   const resetGame = () => {
